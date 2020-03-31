@@ -13,17 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/data', function () {
-    return view('data.index');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/data', function () {
+//     return view('data.index');
+// });
 
 // Route::prefix('/modelName')->middleware(['auth',])->group(function(){
         // ALLRoutesForThisModel
 // });
 
 Auth::routes();
-
+Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');
