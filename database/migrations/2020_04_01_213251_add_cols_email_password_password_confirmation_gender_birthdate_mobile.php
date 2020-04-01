@@ -15,11 +15,11 @@ class AddColsEmailPasswordPasswordConfirmationGenderBirthdateMobile extends Migr
     {
         //
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('national_id');
-            $table->string('password_confirmation');
-            $table->string('gender');
-            $table->date('birth_date');
-            $table->unsignedMediumInteger('mobile');
+            $table->unsignedInteger('national_id')->nullable();
+            $table->string('password_confirmation')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->unsignedMediumInteger('mobile')->nullable();
             
         });
     }
