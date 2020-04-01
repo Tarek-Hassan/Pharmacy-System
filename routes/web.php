@@ -34,4 +34,5 @@ Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::delete('/{user}', 'UserController@destroy')->name("users.destroy");
 });
 // Route::get('/users', 'UserController@index')->name('users.index');
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('', 'HomeController@index')->name('home');
