@@ -32,10 +32,9 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="card">
-                            @yield('content')
-                        </div>
+                    <div class="row card">
+                 
+                        @yield('content')
                     </div>
                     <!-- /.row -->
                 </div>
