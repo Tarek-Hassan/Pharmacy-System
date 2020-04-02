@@ -209,6 +209,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex"></div>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                         class="nav-link">
