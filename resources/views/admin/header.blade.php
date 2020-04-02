@@ -8,6 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Font Awesome Icons -->
+    		<!--end::Page Vendors -->
+	<link href="{{asset('control')}}/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="{{asset('control')}}/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{asset('control')}}/plugins/fontawesome-free/css/all.min.css">
     <!-- IonIcons -->
     <link rel="stylesheet" href="{{asset('control')}}/dist/css/ionicons.min.css">

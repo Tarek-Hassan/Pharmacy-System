@@ -4,6 +4,9 @@
 <div class="container">
     <h1>All Users</h1>
     <a href="{{url('users/create')}}" class="edit btn btn-primary btn-sm">AddUser</a>
+    <br>
+    <br>
+ 
     <table class="table table-bordered data-table">
         <thead>
             <tr>
