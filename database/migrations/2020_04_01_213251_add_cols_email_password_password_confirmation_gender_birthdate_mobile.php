@@ -15,7 +15,7 @@ class AddColsEmailPasswordPasswordConfirmationGenderBirthdateMobile extends Migr
     {
         //
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_pic');
+            $table->string('profile_pic')->nullable();
             $table->unsignedInteger('national_id')->nullable();
             $table->string('password_confirmation')->nullable();
             $table->string('gender')->nullable();
