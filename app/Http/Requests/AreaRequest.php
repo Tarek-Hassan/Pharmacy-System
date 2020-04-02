@@ -24,8 +24,8 @@ class AreaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:area|min:3',
-            'address' => 'required|unique:area|min:3',
+            'name' => 'required|min:3',
+            'address' => 'required|min:3',
     ];
     }
     public function messages()

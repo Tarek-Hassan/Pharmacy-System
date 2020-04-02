@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Area;
-use DataTables;
 use App\Http\Requests\AreaRequest;
+use DataTables;
 
 class AreaController extends Controller
 {
