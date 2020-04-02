@@ -33,6 +33,15 @@ Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::put('/{user}', 'UserController@update')->name("users.update");
         Route::delete('/{user}', 'UserController@destroy')->name("users.destroy");
 });
+Route::prefix('/areas')->middleware(['auth',])->group(function(){
+        Route::get('', 'AreaController@index')->name('areas.index');
+        Route::get('/create', 'AreaController@create')->name("areas.create");
+        Route::post('', 'AreaController@store')->name("areas.store");
+        Route::get('/{area}', 'AreaController@show')->name("areas.show");
+        Route::get('/{area}/edit', 'AreaController@edit')->name("areas.edit");
+        Route::put('/{area}', 'AreaController@update')->name("areas.update");
+        Route::delete('/{area}', 'AreaController@destroy')->name("areas.destroy");
+});
 // Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('', 'HomeController@index')->name('home');
