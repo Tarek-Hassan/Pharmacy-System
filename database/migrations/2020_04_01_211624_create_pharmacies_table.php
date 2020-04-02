@@ -17,6 +17,7 @@ class CreatePharmaciesTable extends Migration
             //img not added
             $table->id('national_id',15)->unique();
             $table->string('pharmacy_name',100);
+            $table->string('img');
             $table->string('password');
             $table->string('email')->unique();
             $table->string('priority');
