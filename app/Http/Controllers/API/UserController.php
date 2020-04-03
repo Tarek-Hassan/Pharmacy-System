@@ -13,15 +13,24 @@ class UserController extends Controller
         return User::all();
     }
 
+    //get one user
+    //how to make it search by email
+    public function show($user){
+        return new UserResource(User::find($user));
+    }
+
     //create new user
     public function store(Request $request){
-        return User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'password_confirmation'=>$request->password_confirmation,
-            'national_id'=>$request->national_id,
-            'gender'=>$request->gender
-        ]);
+        // return User::create([
+        //     'name'=>$request->name,
+        //     'email'=>$request->email,
+        //     'password'=>$request->password,
+        //     'password_confirmation'=>$request->password_confirmation,
+        //     'national_id'=>$request->national_id,
+        //     'gender'=>$request->gender
+        // ]);
+        $user = User::create($request->all());
+
+        return response()->json($user, 201);
     }
 }
