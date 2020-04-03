@@ -31,6 +31,14 @@ class UserController extends Controller
         // ]);
         $user = User::create($request->all());
 
-        return response()->json($user, 201);
+        return response()->json($user, 201);//201 objected created
+    }
+
+    //delete incase we needed it 
+    //it returns 401 unauthenticated but it deletes
+    public function destroy($user){
+        $user->delete();
+
+        return response()->json(null, 204);//204 action executed successfully but no content to return
     }
 }
