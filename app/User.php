@@ -45,19 +45,4 @@ class User extends Authenticatable
     {
         return (bool) $this->is_admin;
     }
-
-    public function createAdmin(array $details) : self
-    {
-        $user = new self($details);
-        if (! $this->isAdminExists()) {
-            $user->is_admin = 1;
-        }
-        $user->save();
-
-        return $user;
-    }
-    public function isAdminExists() : int
-    {
-        return self::where('is_admin', 1)->count();
-    }
 }
