@@ -20,7 +20,8 @@ class User extends Authenticatable
         'national_id',
         'gender',
         'birht_date',
-        'mobile'
+        'mobile',
+        'is_admin'
     ];
 
     /**
@@ -40,4 +41,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isAdmin() : bool
+    {
+        return (bool) $this->is_admin;
+    }
+
+    public function createAdmin(array $details) : self
+    {
+        $user = new self($details);
+        if (! $this->isAdminExists()) {
+            $user->is_admin = 1;
+        }
+        $user->save();
+
+        return $user;
+    }
+    public function isAdminExists() : int
+    {
+        return self::where('is_admin', 1)->count();
+    }
 }
