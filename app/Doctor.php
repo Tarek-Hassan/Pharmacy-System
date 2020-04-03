@@ -15,9 +15,9 @@ class Doctor extends Model
         'pharmacy_id' //for now it is fillable
     ];
     
-    public function pharmacy()
-    {
-        return $this->belongsTo('App\Pharmacy');
-    }
+    // public function pharmacy()
+    // {
+    //     return $this->belongsTo('App\Pharmacy');
+    // }
     
 }

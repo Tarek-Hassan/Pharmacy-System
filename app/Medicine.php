@@ -12,4 +12,5 @@ class Medicine extends Model
         'type',
         'price'
     ];
+    
 }
