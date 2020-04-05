@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,24 +22,24 @@ class UserController extends Controller
     }
 
     //get one user
-    //how to make it search by email
     public function show($user){
         return new UserResource(User::find($user));
     }
 
     //create new user
     public function store(UserRequest $request){
-    //   dd($request);
+        // dd($request->all());
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
+        // public_path('images')
+        $request['profile_pic']=Storage::disk('public')->put(public_path('avatar'), $request['profile_pic']);
+        // dd($request->all());
+        
         $user = User::create($request->all());
-        //added to test verification
+        // verification
         $user->sendApiEmailVerificationNotification();
         $success["message"] = "Please confirm yourself by clicking on verify user button sent to you on your email";
-        
-        // return response()->json($user, 201);//201 objected created
         return response()->json(["success"=>$success], 201);//201 objected created
-
     }
 
 
