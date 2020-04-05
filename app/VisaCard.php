@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class visaCard extends Model
+class VisaCard extends Model
 {
     //
     protected $fillable = [
-        'vise_number'
+        'card_number','card_cvc','exp_date','user_id'
     ];
     
     public function user()

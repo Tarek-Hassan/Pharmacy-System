@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 // Route::get('/data', function () {
 //     return view('data.index');
 // });
@@ -33,6 +31,7 @@ Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::put('/{user}', 'UserController@update')->name("users.update");
         Route::delete('/{user}', 'UserController@destroy')->name("users.destroy");
 });
+
 Route::prefix('/areas')->middleware(['auth',])->group(function(){
         Route::get('', 'AreaController@index')->name('areas.index');
         Route::get('/create', 'AreaController@create')->name("areas.create");
@@ -42,6 +41,14 @@ Route::prefix('/areas')->middleware(['auth',])->group(function(){
         Route::put('/{area}', 'AreaController@update')->name("areas.update");
         Route::delete('/{area}', 'AreaController@destroy')->name("areas.destroy");
 });
+Route::prefix('/payment')->middleware(['auth',])->group(function(){
+        Route::get('', 'StripePaymentController@index')->name('stripe.index');
+Route::get('/create', 'StripePaymentController@stripe')->name('stripe.create');
+Route::post('', 'StripePaymentController@stripePost')->name('stripe.store');
+});
 // Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('', 'HomeController@index')->name('home');
+
+
+
