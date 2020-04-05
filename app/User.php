@@ -24,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'birth_date',
         'mobile',
         'profile_pic',
-        'birht_date',
         'mobile',
         'is_admin'
     ];
@@ -46,15 +45,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-<<<<<<< HEAD
 
     public function sendApiEmailVerificationNotification()
     {
         $this->notify(new VerifyApiEmail); // my notification
-=======
+
+    }
+
+
     public function isAdmin() : bool
     {
         return (bool) $this->is_admin;
->>>>>>> ab458417cd49d76aaba29bbd4d38638d381b8548
     }
 }

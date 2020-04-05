@@ -22,9 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', 'API\UserController@index');
-// Route::get('users/{user}', 'API\UserController@show')->middleware('auth:sanctum');
+Route::get('users/{user}', 'API\UserController@show')->middleware('auth:sanctum');
 Route::post('/users', 'API\UserController@store');
-// Route::put('/users/{user}','API\UserController@update')->middleware('auth:sanctum');
+Route::put('/users/{user}','API\UserController@update')->middleware('auth:sanctum');
 Route::delete('users/{user}', 'API\UserController@destroy');
 
 //sanctum
@@ -46,10 +46,10 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-Route::group(["middleware" => "auth:api"], function(){
-    Route::get('users/{user}', 'API\UserController@show')->middleware("verified");
-    Route::put('/users/{user}','API\UserController@update')->middleware("verified");
-    }); // will work only when user has verified the email
+// Route::group(["middleware" => "auth:api"], function(){
+//     Route::get('users/{user}', 'API\UserController@show')->middleware("verified");
+//     Route::put('/users/{user}','API\UserController@update')->middleware("verified");
+//     }); // will work only when user has verified the email
 
 
 //verify email trial
