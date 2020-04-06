@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -12,13 +13,14 @@ class LoginController extends Controller
     public function login(Request $request){
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
+
             $user = auth()->user();
-            // dd($user->tokens());
+            $user->last_login = Carbon::now();
+            $user->save();
             if ($user->tokens(['tokenable_id'])){
-                // dd(Auth::$user->tokens()->token);
                 return response()->json([
                     'user_info'=>$user,
-                    'access_token'=>$user->tokens(['tokenable_id'])
+                    'access_token'=>$user->tokens[0]->token,
                 ]);
             }else{
                 $user->createTokens($request->email)->plainTextToken;

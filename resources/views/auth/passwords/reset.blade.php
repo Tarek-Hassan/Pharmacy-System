@@ -17,7 +17,7 @@
                 @csrf   
                 <input type="hidden" name="token" value="{{ $token }}">
                 <div class="input-group mb-3">
-                        <input type="email" class="form-control" class="form-control m-input @error('email') is-invalid @enderror"    value="{{ $email ?? old('email') }}" required disabled name="email" placeholder="Email">
+                        <input type="email" class="form-control" class="form-control m-input @error('email') is-invalid @enderror"    value="{{ $email ?? old('email') }}" required  name="email" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

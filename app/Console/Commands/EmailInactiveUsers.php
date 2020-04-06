@@ -40,11 +40,9 @@ class EmailInactiveUsers extends Command
      */
     public function handle()
     {
-        //
         // use this for test
 
-        // $limit = Carbon::now()->subDay(30);
-        $limit = Carbon::now()->subDay(1);
+        $limit = Carbon::now()->subDay(30);
         $inactive_user = User::where('last_login', '<', $limit)->get();
 
         foreach ($inactive_user as $user) {
