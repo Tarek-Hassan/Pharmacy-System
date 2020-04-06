@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Order;
 use App\Doctor;
 use App\Pharmacy;
+use App\Medicine;
 use App\Http\Requests\OrderRequest;
 use DataTables;
 
-class OrderController extends Controller
+class MedicineOrderController extends Controller
 {
     
-
        //
        public function index(Request $request)
        {
@@ -80,5 +81,7 @@ class OrderController extends Controller
            return redirect()->route('orders.index');
        }
 }
+
+
 
 

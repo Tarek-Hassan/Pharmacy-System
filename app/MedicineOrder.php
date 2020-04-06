@@ -8,31 +8,35 @@ class MedicineOrder extends Model
 {
     //
     protected $fillable = [
+        'medicine_id',
+        'order_id',
+        'user_id',
+        'pharmacy_id',
         'quantity',
-        'total_price'
+        'total_price',
     ];
     
     
     public function pharmacy()
     {
-        return $this->belongsTo('App\Pharmacy');
+        return $this->belongsToMany('App\Pharmacy');
     }
     
     
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User');
     }
     
     
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsToMany('App\Order');
     }
     
     
     public function medicine()
     {
-        return $this->belongsTo('App\Medicine');
+        return $this->belongsToMany('App\Medicine');
     }
 }

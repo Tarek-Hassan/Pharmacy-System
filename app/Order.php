@@ -21,4 +21,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Pharmacy');
     }
+
+    public function doctor()
+    {
+        return $this->belongsTo('App\Doctor');
+    }
 }
