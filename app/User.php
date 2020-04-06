@@ -25,7 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'mobile',
         'profile_pic',
         'mobile',
-        'is_admin'
+        'is_admin',
+        'api_token'
     ];
 
     /**

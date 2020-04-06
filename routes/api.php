@@ -38,6 +38,7 @@ Route::post('/sanctum/token', function (Request $request) {
     ]);
 
     $user = User::where('email', $request->email)->first();
+    // dd($user);
 
     if (! $user || ! Hash::check($request->password, $user->password)) {
         throw ValidationException::withMessages([
@@ -47,6 +48,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
     return $user->createToken($request->device_name)->plainTextToken;
 });
+Route::post('login', 'API\LoginController@login');
 
 
 //verify email routes
