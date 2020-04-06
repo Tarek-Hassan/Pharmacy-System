@@ -27,6 +27,7 @@ class StripePaymentController extends Controller
             return $button;
                     })
                     ->addColumn('username', function($row){return $row->user->name;})
+                    ->addColumn('amount', function($row){return $row->amount/100.0;})
                     ->rawColumns(['action'])
                     ->make(true);
         }
@@ -45,7 +46,6 @@ class StripePaymentController extends Controller
     }
     public function stripePost(Request $request)
     {
-        
         // dd($request);
         // convert rom Cent To Dollar (Cent/100)
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -57,6 +57,10 @@ class StripePaymentController extends Controller
         ]);
         $this->storeCardInfo($request);
         return redirect()->back()->withSuccess('Payment successful!'); 
+    }
+    public function destroy($id) {
+        $visacard=VisaCard::find($id)->delete();
+        return redirect()->route('stripe.index');
     }
 
 

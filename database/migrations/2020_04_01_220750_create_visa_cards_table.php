@@ -15,6 +15,7 @@ class CreateVisaCardsTable extends Migration
     {
         Schema::create('visa_cards', function (Blueprint $table) {
             $table->id()->unique();
+            $table->string('amount')->nullable();
             $table->string('card_number')->nullable();
             $table->string('card_cvc')->nullable();
             $table->string('exp_date')->nullable();

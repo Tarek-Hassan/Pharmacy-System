@@ -45,6 +45,7 @@ Route::prefix('/payment')->middleware(['auth',])->group(function(){
         Route::get('', 'StripePaymentController@index')->name('stripe.index');
 Route::get('/create', 'StripePaymentController@stripe')->name('stripe.create');
 Route::post('', 'StripePaymentController@stripePost')->name('stripe.store');
+Route::delete('/{id}', 'StripePaymentController@destroy')->name("stripe.destroy");
 });
 // Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');

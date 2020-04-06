@@ -8,7 +8,7 @@ class VisaCard extends Model
 {
     //
     protected $fillable = [
-        'card_number','card_cvc','exp_date','user_id'
+        'amount','card_number','card_cvc','exp_date','user_id'
     ];
     
     public function user()

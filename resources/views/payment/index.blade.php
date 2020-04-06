@@ -1,6 +1,6 @@
 @extends('admin.index')
-@section('title','Area')
-@section('section_title','Area')
+@section('title','Payment')
+@section('section_title','Payment')
 @section('content')
 <div class="container">
    
@@ -11,6 +11,7 @@
             <tr>
                 <th>ID</th>
                 <th>card_number</th>
+                <th>Amount /$</th>
                 <th>card_cvc</th>
                 <th>exp_date</th>
                 <th>userName</th>
@@ -74,6 +75,10 @@
                     name: 'card_number'
                 },
                 {
+                    data: 'amount',
+                    name: 'amount'
+                },
+                {
                     data: 'card_cvc',
                     name: 'card_cvc'
                 },
@@ -97,7 +102,7 @@
             var myBookId = $(this).data('id');
             console.log(myBookId);
             var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/areas/' + myBookId; // assign action 
+            deleteForm.action = '/payment/' + myBookId; // assign action 
 
         });
     });
