@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Notifications\VerifyApiEmail;
+use App\Notifications\VerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -48,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendApiEmailVerificationNotification()
     {
-        $this->notify(new VerifyApiEmail); // my notification
+        $this->notify(new VerifyEmail); // my notification
 
     }
 

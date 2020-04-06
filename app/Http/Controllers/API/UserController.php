@@ -28,12 +28,10 @@ class UserController extends Controller
 
     //create new user
     public function store(UserRequest $request){
-        // dd($request->all());
+
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        // public_path('images')
         $request['profile_pic']=Storage::disk('public')->put(public_path('avatar'), $request['profile_pic']);
-        // dd($request->all());
         
         $user = User::create($request->all());
         // verification

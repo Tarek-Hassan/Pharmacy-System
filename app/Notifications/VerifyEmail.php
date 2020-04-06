@@ -5,7 +5,7 @@ use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
-class VerifyApiEmail extends VerifyEmailBase
+class VerifyEmail extends VerifyEmailBase
 {
     /**
     * Get the verification URL for the given notifiable.

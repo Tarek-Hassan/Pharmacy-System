@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+//user routes and authentication
 Route::get('/users', 'API\UserController@index');
 Route::get('users/{user}', 'API\UserController@show')->middleware('auth:sanctum');
 Route::post('/users', 'API\UserController@store');
@@ -46,12 +48,15 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-// Route::group(["middleware" => "auth:api"], function(){
-//     Route::get('users/{user}', 'API\UserController@show')->middleware("verified");
-//     Route::put('/users/{user}','API\UserController@update')->middleware("verified");
-//     }); // will work only when user has verified the email
 
-
-//verify email trial
+//verify email routes
 Route::get("email/verify/{id}", "API\VerificationController@verify")->name("verificationapi.verify");
 Route::get("email/resend", "API\VerificationController@resend")->name("verificationapi.resend");
+
+
+//address routes
+Route::get('/address', 'API\AddressController@index');
+Route::get('address/{address}', 'API\AddressController@show');//->middleware('auth:sanctum');
+Route::post('/address', 'API\AddressController@store');
+Route::put('/address/{address}','API\AddressController@update');//->middleware('auth:sanctum');
+Route::delete('address/{address}', 'API\AddressController@destroy');
