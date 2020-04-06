@@ -3,7 +3,7 @@
 @section('section_title','MedicineOrder')
 @section('content')
 <div class="container">
-    <a href="{{url('medicineorder/create')}}" class="edit btn btn-primary btn-sm">Add MedicineOrder</a>
+    <a href="{{url('medicineorders/create')}}" class="edit btn btn-primary btn-sm">Add MedicineOrder</a>
     <br>
     <br>
  
@@ -67,7 +67,7 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('orders.index') }}",
+            ajax: "{{ route('medicineorders.index') }}",
             columns: [
                 {
                     data: 'id',

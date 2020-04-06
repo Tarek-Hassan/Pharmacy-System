@@ -13,7 +13,7 @@ class MedicineOrder extends Model
         'user_id',
         'pharmacy_id',
         'quantity',
-        'total_price',
+        'total_price'
     ];
     
     

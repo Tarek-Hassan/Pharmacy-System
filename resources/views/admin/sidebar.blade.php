@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('medicineorder')}}" class="nav-link">
+                            <a href="{{url('medicineorders')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>MedicineOrder</p>
                             </a>
