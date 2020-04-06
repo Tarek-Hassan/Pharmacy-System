@@ -16,27 +16,20 @@ class LoginController extends Controller
 
             $user = auth()->user();
             $user->last_login = Carbon::now();
-            // $user->save();
-            dd($user->tokens[0]->token);
-            // if ($user->tokens(['tokenable_id'])){
-            if ($user->tokens){
-                dd("aaa");
+            if (!$user->tokens->isEmpty() ){
                 return response()->json([
                     'user_info'=>$user,
                     'access_token'=>$user->tokens[0]->token,
                 ]);
             }else{
-                dd("bbbbb");
-                $user->createTokens($request->email)->plainTextToken;
-            // $user->api_token = $user->createToken($request->email)->plainTextToken;
-            $user->save();
-            return response()->json([
-                'user_info'=>$user,
-                'access_token'=>$user->createTokens($request->email)->plainTextToken
-            ]);
+                $token=$user->createToken($request->email)->plainTextToken;
+                $user->save();
+                return response()->json([
+                    'user_info'=>$user,
+                    'access_token'=>$token
+                ]);
             }
         }
-        
         return response()->json([
             'error' => 'Unauthenticated user',
             'code' => 401,
