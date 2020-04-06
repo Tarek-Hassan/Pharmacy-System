@@ -13,24 +13,23 @@ class LoginController extends Controller
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             $user = auth()->user();
-            // dd($user->tokens());
-            if ($user->tokens(['tokenable_id'])){
-                // dd(Auth::$user->tokens()->token);
+
+            if (!$user->tokens->isEmpty() ){
+                echo "heelloo from not empty";
                 return response()->json([
                     'user_info'=>$user,
-                    'access_token'=>$user->tokens(['tokenable_id'])
+                    'access_token'=>$user->tokens[0]->token,
                 ]);
             }else{
-                $user->createTokens($request->email)->plainTextToken;
-            // $user->api_token = $user->createToken($request->email)->plainTextToken;
-            $user->save();
-            return response()->json([
-                'user_info'=>$user,
-                'access_token'=>$user->createTokens($request->email)->plainTextToken
-            ]);
+                echo "hello from else";
+                $token=$user->createToken($request->email)->plainTextToken;
+                $user->save();
+                return response()->json([
+                    'user_info'=>$user,
+                    'access_token'=>$token
+                ]);
             }
         }
-        
         return response()->json([
             'error' => 'Unauthenticated user',
             'code' => 401,
