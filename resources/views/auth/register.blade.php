@@ -12,7 +12,7 @@
     <div class="card-body register-card-body">
       @include('admin.error')
       <p class="login-box-msg">Enter your details to create your account:</p>
-      <form action="{{ route('register') }}" method="post">
+      <form action="{{-- route('register') --}}" method="post">
       @csrf  
       <div class="input-group mb-3">
           <input type="text"  class="form-control m-input @error('name') is-invalid @enderror" id="name"

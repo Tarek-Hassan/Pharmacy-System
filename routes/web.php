@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // Route::prefix('/modelName')->middleware(['auth',])->group(function(){
         // ALLRoutesForThisModel
 // });
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::get('', 'UserController@index')->name('users.index');//->middleware('verified');
         Route::get('/create', 'UserController@create')->name("users.create");

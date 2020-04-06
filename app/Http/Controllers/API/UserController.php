@@ -43,12 +43,12 @@ class UserController extends Controller
 
 
     //put function
-    public function update(Request $request,$user)
+    public function update(Request $request,$id)
     {
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        
-        User::find($user)->update($request->all());
+        $user=User::find($id);
+        $user->update($request->all());
 
         return response()->json($user, 200);
     }

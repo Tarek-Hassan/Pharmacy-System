@@ -34,6 +34,7 @@ class AreaController extends Controller
     }
 
     public function create() {
+        
         return view('areas.create');
     }
     public function store(AreaRequest $request) {

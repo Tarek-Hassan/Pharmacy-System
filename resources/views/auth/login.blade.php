@@ -67,9 +67,9 @@
 								</a>
 								@endif
                 </p>
-                <p class="mb-0">
-                    <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-                </p>
+                <!-- <p class="mb-0">
+                    <a href="{{-- route('register') --}}" class="text-center">Register a new membership</a>
+                </p> -->
             </div>
             <!-- /.login-card-body -->
         </div>
