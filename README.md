@@ -80,10 +80,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Pakages
 1)yajra/laravel-datatables-oracle
+
 2)composer require stripe/stripe-php
                 this link to Test CardNumber (https://stripe.com/docs/testing#cards)
 3)composer require laravel/sanctum
-4)php artisan schedule:run =>to test Schedual
+
+4)schedule
+    -php artisan schedule:run (ON LOCALHOST )
+    - * * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1(ON SERVER )
 
 
 
