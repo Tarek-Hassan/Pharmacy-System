@@ -82,6 +82,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 1)yajra/laravel-datatables-oracle
 2)composer require stripe/stripe-php
                 this link to Test CardNumber (https://stripe.com/docs/testing#cards)
+3)composer require laravel/sanctum
 
 
 

@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\VerifyEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +21,9 @@ class User extends Authenticatable
         'name', 'email', 'password','password_confirmation',
         'national_id',
         'gender',
-        'birht_date',
+        'birth_date',
+        'mobile',
+        'profile_pic',
         'mobile',
         'is_admin'
     ];
@@ -30,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'password_confirmation','remember_token',
     ];
 
     /**
@@ -41,6 +45,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendApiEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail); // my notification
+
+    }
+
+
     public function isAdmin() : bool
     {
         return (bool) $this->is_admin;
