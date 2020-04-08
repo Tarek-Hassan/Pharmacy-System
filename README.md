@@ -88,6 +88,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 4)schedule
     -php artisan schedule:run (ON LOCALHOST )
     - * * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1(ON SERVER )
+5)queue    
+    -php artisan queue:work --queue=high,default
+    -php artisan queue:table
+    -php artisan migrate
+    -QUEUE_CONNECTION=database(env)
+    -php artisan make:job SendEmail
 
 
 

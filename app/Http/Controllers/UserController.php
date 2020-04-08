@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\GreetingNotification;
 use Illuminate\Http\Request;
 use App\User;
-use DataTables;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -13,10 +15,10 @@ class UserController extends Controller
     {
         // 1-change the model name
         //  2-change the href of the edit to be (modelName/$row->id/edit)
-        
+ 
         if ($request->ajax()) {
             $data = User::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
@@ -32,7 +34,9 @@ class UserController extends Controller
     }
 
     public function create() {
-    
+        // $user=User::find(7)->get();
+        // dd(Auth::user()->id);
+        // Auth::user()->notify(new GreetingNotification());
         return view('users.create');
     }
     public function store(Request $request) {

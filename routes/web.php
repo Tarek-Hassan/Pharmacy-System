@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 // Route::prefix('/modelName')->middleware(['auth',])->group(function(){
         // ALLRoutesForThisModel
 // });
-Auth::routes(['register' => false]);
+        Auth::routes();
+        // Auth::routes(['register' => false]);
 Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::get('', 'UserController@index')->name('users.index');//->middleware('verified');
         Route::get('/create', 'UserController@create')->name("users.create");
@@ -44,14 +45,35 @@ Route::prefix('/areas')->middleware(['auth',])->group(function(){
 });
 Route::prefix('/payment')->middleware(['auth',])->group(function(){
         Route::get('', 'StripePaymentController@index')->name('stripe.index');
-Route::get('/create', 'StripePaymentController@stripe')->name('stripe.create');
-Route::post('', 'StripePaymentController@stripePost')->name('stripe.store');
-Route::delete('/{id}', 'StripePaymentController@destroy')->name("stripe.destroy");
+        Route::get('/create', 'StripePaymentController@stripe')->name('stripe.create');
+        Route::post('', 'StripePaymentController@stripePost')->name('stripe.store');
+        Route::delete('/{id}', 'StripePaymentController@destroy')->name("stripe.destroy");
 });
 // Route::get('/users', 'UserController@index')->name('users.index');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('', 'HomeController@index')->name('home');
-
-
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('', 'HomeController@index')->name('home');
 //email verfication trial registration form 
 // Auth::routes(['verify'=> true]);
+// Route::get('send', 'HomeController@enqueue');
+//Notify Route
+// Route::get('/notify', function () {
+   
+//         $user = \App\User::find(7);
+    
+//         $details = [
+//                 'greeting' => 'Hi Artisan',
+//                 'body' => 'This is our example notification tutorial',
+//                 'thanks' => 'Thank you for visiting codechief.org!',
+//         ];
+    
+//         $user->notify(new \App\Notifications\GreetingNotification($details));
+    
+//         return dd("Done");
+//     });
+//     Route::get('/markAsRead', function(){
+
+// 	auth()->user()->unreadNotifications->markAsRead();
+
+// 	return redirect()->back();
+
+// })->name('mark');
