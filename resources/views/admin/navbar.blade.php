@@ -29,32 +29,39 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"></i>
+                <i class="far fa-bell nav-icon mr-3"></i>
+                @if(auth()->user()->unreadNotifications->count())
                 <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}
                 </span>
+                @endif
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header"><i
-                        class="fas fa-envelope mr-2"></i>{{ auth()->user()->unreadNotifications->count() }}
-                    Notifications</span>
+                <a href="{{route('mark')}}"><span class="dropdown-item dropdown-header">
+                        <i class="fas fa-envelope mr-2"></i>{{ auth()->user()->unreadNotifications->count() }}
+                        MarkAllAsRead</span></a>
+
+                </a>
+                {{--dd(var_dump(auth()->user()->unreadNotifications))--}}
                 @foreach(auth()->user()->unreadNotifications as $notification)
 
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item bg-info">
+                    {{ $notification->data['data'] }}
 
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                @endforeach
+
+                @foreach(auth()->user()->readNotifications as $read)
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    {{ $notification->data['data'] }}
+                    {{ $read->data['data'] }}
                     <!-- <span class="float-right text-muted text-sm">3 mins</span> -->
                 </a>
 
                 @endforeach
-
-                <!-- @foreach(auth()->user()->readNotifications as $read)
-
-       {{ $read->data['data'] }}
-
-@endforeach -->
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <a href="{{route(deleteNotification)}}" class="dropdown-item dropdown-footer">Delete All Notifications</a>
             </div>
         </li>
         <li class="nav-item">
