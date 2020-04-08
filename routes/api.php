@@ -29,25 +29,7 @@ Route::post('/users', 'API\UserController@store');
 Route::put('/users/{user}','API\UserController@update')->middleware('auth:sanctum');
 Route::delete('users/{user}', 'API\UserController@destroy');
 
-//sanctum
-Route::post('/sanctum/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required'
-    ]);
-
-    $user = User::where('email', $request->email)->first();
-    // dd($user);
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-
-    return $user->createToken($request->device_name)->plainTextToken;
-});
+//login endpoint
 Route::post('login', 'API\LoginController@login');
 
 

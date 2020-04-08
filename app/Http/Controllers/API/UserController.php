@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -28,12 +29,34 @@ class UserController extends Controller
 
     //create new user
     public function store(UserRequest $request){
-
+        // dd($request->all());
+       
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        $request['profile_pic']=Storage::disk('public')->put(public_path('avatar'), $request['profile_pic']);
+        // dd($request['profile_pic']);
+
+        // storing image in public/pics and changes its name
+        if ($request->hasfile('profile_pic')){
+            $file=$request->file('profile_pic');
+            $extention=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extention;
+            Storage::disk('public')->put('pics/'.$filename, File::get($file));
+        }
+        // $request->profile_pic=Storage::disk('public')->put(public_path('avatar'), $request['profile_pic']);
+        $request->profile_pic=$filename;
         
-        $user = User::create($request->all());
+
+        $user = User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'password_confirmation'=>$request->password_confirmation,
+            'profile_pic'=>$request->profile_pic,
+            'national_id'=>$request->national_id,
+            'gender'=>$request->gender,
+
+        ]);
+        // $user= User::create($request->all());
         // verification
         $user->sendApiEmailVerificationNotification();
         $success["message"] = "Please confirm yourself by clicking on verify user button sent to you on your email";
@@ -54,9 +77,18 @@ class UserController extends Controller
     }
 
     //delete incase we needed it 
-    public function destroy($user){
-        User::find($user)->delete();
+    public function destroy(Request $request, $user){
+        
+        $user=User::find($user);
 
-        return response()->json(null, 204);//204 action executed successfully but no content to return
+        //trial to delete image
+        dd(Storage::disk('public')->delete('pics/'.$user->profile_pic));
+
+        $user->delete();
+
+        return response()->json("user deleted", 204);//204 action executed successfully but no content to return
     }
+
+
+   
 }
