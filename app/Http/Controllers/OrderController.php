@@ -41,8 +41,9 @@ class OrderController extends Controller
            $doctors = Doctor::all();
         //    dd($doctors);
            return view('orders.create',[
-               'doctors' => $doctors,
                'pharmacies' => $pharmacies,
+               'doctors' => $doctors,
+
            ]);
        }
        public function store(Request $request) {
@@ -65,8 +66,10 @@ class OrderController extends Controller
    
    
        public function edit(string $id) {
+        $pharmacies = Pharmacy::all();
+        $doctors = Doctor::all();
            $orders=Order::findOrFail($id);
-           return view('orders.edit', compact('orders'));
+           return view('orders.edit', compact('orders','doctors','pharmacies'));
        }
    
        public function update(OrderRequest $request, $id) {

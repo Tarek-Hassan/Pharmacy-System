@@ -44,7 +44,7 @@
                     Pharmacy Name
                     <select class="custom-select" name="pharmacy_id" >
                       @foreach($pharmacies as $pharmacy)
-                        <option value="{{$pharmacy->national_id}}">{{$pharmacy->pharmacy_name}}</option>
+                        <option value="{{$pharmacy->id}}">{{$pharmacy->pharmacy_name}}</option>
                       @endforeach
                     </select>
 
@@ -58,7 +58,7 @@
                     Doctor Name
                     <select class="custom-select" name="doctor_id" >
                       @foreach($doctors as $doctor)
-                        <option value="{{$doctor->national_id}}">{{$doctor->doctor_name}}</option>
+                        <option value="{{$doctor->id}}">{{$doctor->doctor_name}}</option>
                       @endforeach
                     </select>
 

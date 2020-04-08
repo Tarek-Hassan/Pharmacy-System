@@ -57,7 +57,7 @@ class MedicineOrderController extends Controller
            ]);
        }
        public function store(Request $request) {
-        //    dd($request->all());
+            // dd($request->all());
         //    $orders=Order::create($request->all());
             Order::create([
                 'medicine_id' => $request->medicine_id,

@@ -8,16 +8,22 @@ class Doctor extends Model
 {
     //
     protected $fillable = [
-        'email',
-        'doctor_name',
-        'password',
         'national_id',
+        'doctor_name',
+        'img',
+        'email',
+        'password',
         'pharmacy_id' //for now it is fillable
     ];
+
+
+    protected $hidden = [
+        'password',
+    ];
     
-    // public function pharmacy()
-    // {
-    //     return $this->belongsTo('App\Pharmacy');
-    // }
+    public function pharmacy()
+    {
+        return $this->belongsTo('App\Pharmacy');
+    }
     
 }

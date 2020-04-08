@@ -54,7 +54,7 @@
                     Pharmacy Name
                     <select class="custom-select" name="pharmacy_id" >
                       @foreach($pharmacies as $pharmacy)
-                        <option value="{{$pharmacy->national_id}}">{{$pharmacy->pharmacy_name}}</option>
+                        <option value="{{$pharmacy->id}}">{{$pharmacy->pharmacy_name}}</option>
                       @endforeach
                     </select>
                    </div>

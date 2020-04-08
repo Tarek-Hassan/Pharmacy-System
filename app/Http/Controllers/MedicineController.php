@@ -39,7 +39,9 @@ class MedicineController extends Controller
        }
        public function store(Request $request) {
         //    dd($request->all());
+            
            $medicines=Medicine::create($request->all());
+
            return redirect()->route('medicines.index');
        }
        public function show($id) {

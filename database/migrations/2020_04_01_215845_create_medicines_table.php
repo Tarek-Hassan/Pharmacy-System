@@ -18,7 +18,7 @@ class CreateMedicinesTable extends Migration
             $table->string('medicine_name');
             $table->string('type');
             $table->string('price');
-            $table->timestamps();;
+            $table->timestamps();
         });
     }
 

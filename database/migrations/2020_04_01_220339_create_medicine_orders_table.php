@@ -14,6 +14,7 @@ class CreateMedicineOrdersTable extends Migration
     public function up()
     {
         Schema::create('medicine_orders', function (Blueprint $table) {
+            $table->id();
             $table->unsignedInteger('medicine_id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('user_id');

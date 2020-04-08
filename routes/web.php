@@ -67,7 +67,16 @@ Route::prefix('/medicineorders')->middleware(['auth',])->group(function(){
         Route::get('/{medicineorder}', 'MedicineOrderController@show')->name("medicineorders.show");
         Route::get('/{medicineorder}/edit', 'MedicineOrderController@edit')->name("medicineorders.edit");
         Route::put('/{medicineorder}', 'MedicineOrderController@update')->name("medicineorders.update");
-        Route::delete('/{ordmedicineorderer}', 'MedicineOrderController@destroy')->name("medicineorders.destroy");
+        Route::delete('/{medicineorder}', 'MedicineOrderController@destroy')->name("medicineorders.destroy");
+});
+Route::prefix('/doctors')->middleware(['auth',])->group(function(){
+        Route::get('', 'DoctorController@index')->name('doctors.index');
+        Route::get('/create', 'DoctorController@create')->name("doctors.create");
+        Route::post('', 'DoctorController@store')->name("doctors.store");
+        Route::get('/{doctor}', 'DoctorController@show')->name("doctors.show");
+        Route::get('/{doctor}/edit', 'DoctorController@edit')->name("doctors.edit");
+        Route::put('/{doctor}', 'DoctorController@update')->name("doctors.update");
+        Route::delete('/{doctor}', 'DoctorController@destroy')->name("doctors.destroy");
 });
 // Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');

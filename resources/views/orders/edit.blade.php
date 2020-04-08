@@ -36,14 +36,32 @@
                     <label for="exampleInputaddress">Creator_Type</label>
                     <input type="text" name="creator_type" value="{{$orders->creator_type}}" class="form-control" id="exampleInputaddress" placeholder="Enter Price">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputaddress">Pharmacy_Id</label>
                     <input type="text" name="pharmacy_id" value="{{$orders->pharmacy_id}}" class="form-control" id="exampleInputaddress" placeholder="Enter Price">
-                  </div>
+                  </div> -->
                   <div class="form-group">
+                    Pharmacy Name
+                    <select class="custom-select" name="pharmacy_id" >
+                      @foreach($pharmacies as $pharmacy)
+                        <option value="{{$pharmacy->id}}" {{$pharmacy->id==$orders->pharmacy_id?'selected':''}}>{{$pharmacy->pharmacy_name}}</option>
+                      @endforeach
+                    </select>
+
+                   </div>
+                  <!-- <div class="form-group">
                     <label for="exampleInputaddress">Doctor_id</label>
                     <input type="text" name="doctor_id" value="{{$orders->doctor_id}}" class="form-control" id="exampleInputaddress" placeholder="Enter Price">
-                  </div>
+                  </div> -->
+                  <div class="form-group">
+                    Doctor Name
+                    <select class="custom-select" name="doctor_id" >
+                      @foreach($doctors as $doctor)
+                        <option value="{{$doctor->id}}" {{$doctor->id==$orders->doctor_id?'selected':''}} >{{$doctor->doctor_name}}</option>
+                      @endforeach
+                    </select>
+
+                   </div>
                  
                 </div>
                 <!-- /.card-body -->
