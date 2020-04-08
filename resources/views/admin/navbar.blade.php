@@ -61,7 +61,7 @@
 
                 @endforeach
                 <div class="dropdown-divider"></div>
-                <a href="{{route(deleteNotification)}}" class="dropdown-item dropdown-footer">Delete All Notifications</a>
+                <!-- <a href="#" class="dropdown-item dropdown-footer">Delete All Notifications</a> -->
             </div>
         </li>
         <li class="nav-item">

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Area;
 use App\Http\Requests\AreaRequest;
-use Illuminate\Support\Carbon;
 use Yajra\DataTables\DataTables ;
 
 class AreaController extends Controller

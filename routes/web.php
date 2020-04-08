@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-        Auth::routes(['register' => false]);
+Auth::routes(['register' => false]);
 Route::prefix('/users')->middleware(['auth',])->group(function(){
         Route::get('', 'UserController@index')->name('users.index');//->middleware('verified');
         Route::get('/create', 'UserController@create')->name("users.create");
@@ -34,6 +34,15 @@ Route::prefix('/areas')->middleware(['auth',])->group(function(){
         Route::get('/{area}/edit', 'AreaController@edit')->name("areas.edit");
         Route::put('/{area}', 'AreaController@update')->name("areas.update");
         Route::delete('/{area}', 'AreaController@destroy')->name("areas.destroy");
+});
+Route::prefix('/address')->middleware(['auth',])->group(function(){
+        Route::get('', 'AddressController@index')->name('address.index');
+        Route::get('/create', 'AddressController@create')->name("address.create");
+        Route::post('', 'AddressController@store')->name("address.store");
+        Route::get('/{address}', 'AddressController@show')->name("address.show");
+        Route::get('/{address}/edit', 'AddressController@edit')->name("address.edit");
+        Route::put('/{address}', 'AddressController@update')->name("address.update");
+        Route::delete('/{address}', 'AddressController@destroy')->name("address.destroy");
 });
 Route::prefix('/payment')->middleware(['auth',])->group(function(){
         Route::get('', 'StripePaymentController@index')->name('stripe.index');
@@ -57,9 +66,6 @@ Route::prefix('/markAsRead')->middleware(['auth',])->group(function(){
 //         })->name('deleteNotification');
 //     });
 
-// Route::get('/users', 'UserController@index')->name('users.index');
-        // Route::get('/home', 'HomeController@index')->name('home');
-        Route::get('', 'HomeController@index')->name('home');
 
 //Notify Route this put in OrderController To NOtifiyPrice
 Route::get('/notify', function () {
@@ -72,3 +78,7 @@ Route::get('/notify', function () {
         $user->notify(new \App\Notifications\PriceNotification($details));
     });
     
+// =================================================================================================
+// Route::get('/users', 'UserController@index')->name('users.index');
+        // Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('', 'HomeController@index')->name('home');
