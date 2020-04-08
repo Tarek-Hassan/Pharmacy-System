@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Address;
 use App\Http\Resources\AddressResource;
-use App\User;
+
 
 class AddressController extends Controller
 {

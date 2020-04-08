@@ -9,7 +9,6 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,11 +28,10 @@ class UserController extends Controller
 
     //create new user
     public function store(UserRequest $request){
-        // dd($request->all());
-       
+        
+       //hash password
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        // dd($request['profile_pic']);
 
         // storing image in public/pics and changes its name
         if ($request->hasfile('profile_pic')){
@@ -42,10 +40,9 @@ class UserController extends Controller
             $filename=time().'.'.$extention;
             Storage::disk('public')->put('pics/'.$filename, File::get($file));
         }
-        // $request->profile_pic=Storage::disk('public')->put(public_path('avatar'), $request['profile_pic']);
-        $request->profile_pic=$filename;
-        
 
+
+        $request->profile_pic=$filename;
         $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
@@ -54,6 +51,9 @@ class UserController extends Controller
             'profile_pic'=>$request->profile_pic,
             'national_id'=>$request->national_id,
             'gender'=>$request->gender,
+            'mobile'=>$request->mobile,
+            'is_admin'=>$request->is_admin,
+            'birth_date'=>$request->birth_date
 
         ]);
         // $user= User::create($request->all());

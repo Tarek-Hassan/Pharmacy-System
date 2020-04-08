@@ -44,3 +44,7 @@ Route::get('address/{address}', 'API\AddressController@show');//->middleware('au
 Route::post('/address', 'API\AddressController@store');
 Route::put('/address/{address}','API\AddressController@update');//->middleware('auth:sanctum');
 Route::delete('address/{address}', 'API\AddressController@destroy');
+
+
+//prescription
+Route::post('/prescription','API\PrescriptionController@store');

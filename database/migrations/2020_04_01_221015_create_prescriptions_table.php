@@ -15,8 +15,10 @@ class CreatePrescriptionsTable extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->string('img'); 
+            $table->string('img');
+            $table->unsignedTinyInteger('is_insured')->default(0);
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('delivery_address_id')->nullable(); 
             $table->timestamps();
         });
     }
