@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -34,9 +35,8 @@ class UserController extends Controller
     }
 
     public function create() {
-        // $user=User::find(7)->get();
-        // dd(Auth::user()->id);
-        // Auth::user()->notify(new GreetingNotification());
+        $when = carbon::now()->addSeconds(5);
+        User::find(7)->notify((new GreetingNotification)->delay($when));
         return view('users.create');
     }
     public function store(Request $request) {
