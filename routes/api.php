@@ -46,5 +46,6 @@ Route::put('/address/{address}','API\AddressController@update');//->middleware('
 Route::delete('address/{address}', 'API\AddressController@destroy');
 
 
-//prescription
-Route::post('/prescription','API\PrescriptionController@store');
+//prescription/order
+Route::post('/orders','API\PrescriptionController@store');
+Route::put('/orders/{id}','API\PrescriptionController@update');

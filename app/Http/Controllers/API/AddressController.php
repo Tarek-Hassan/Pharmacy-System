@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Address;
 use App\Http\Resources\AddressResource;
-
+use App\User;
 
 class AddressController extends Controller
 {
@@ -16,6 +16,14 @@ class AddressController extends Controller
     }
 
     public function show($address){
+        // $user_address=Address::find($address);
+        // $user_id=User::find($user_address);
+
+        // dd($user_id);
+        // dd(auth()->user());
+        // if ($user->user_id != auth()->user()->id){
+        //     return "you are not autherized";
+        // }
         return new AddressResource(Address::find($address));
     }
 

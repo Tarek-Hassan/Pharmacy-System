@@ -23,6 +23,9 @@ class UserController extends Controller
 
     //get one user
     public function show($user){
+        if ($user != auth()->user()->id){
+            return "you re not autherized";
+       }
         return new UserResource(User::find($user));
     }
 
@@ -32,7 +35,8 @@ class UserController extends Controller
        //hash password
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-
+        // $request['profile_pic']=Storage::disk('public')->put(storage_path('images'),$request['profile_pic']);
+        // dd($request->all());
         // storing image in public/pics and changes its name
         if ($request->hasfile('profile_pic')){
             $file=$request->file('profile_pic');
@@ -40,8 +44,6 @@ class UserController extends Controller
             $filename=time().'.'.$extention;
             Storage::disk('public')->put('pics/'.$filename, File::get($file));
         }
-
-
         $request->profile_pic=$filename;
         $user = User::create([
             'name'=>$request->name,
@@ -68,6 +70,9 @@ class UserController extends Controller
     //put function
     public function update(Request $request,$user)
     {
+       if ($user != auth()->user()->id){
+            return "you re not autherized";
+       }
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
         
