@@ -15,6 +15,7 @@
                 <h3 class="card-title">Create Order</h3>
               </div>
               <!-- /.card-header -->
+              
               <!-- form start -->
               <form method="POST" action="{{route('orders.store')}}" enctype="multipart/form-data">
                   @csrf
