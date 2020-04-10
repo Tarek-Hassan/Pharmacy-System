@@ -19,9 +19,7 @@ class AddressController extends Controller
         // $user_address=Address::find($address);
         // $user_id=User::find($user_address);
 
-        // dd($user_id);
-        // dd(auth()->user());
-        // if ($user->user_id != auth()->user()->id){
+        // if ($user_id != auth()->user()->id){
         //     return "you are not autherized";
         // }
         return new AddressResource(Address::find($address));

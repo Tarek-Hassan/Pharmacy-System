@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Auth::routes();
 Route::prefix('/users')->middleware(['auth',])->group(function(){
-        Route::get('', 'UserController@index')->name('users.index');//->middleware('verified');
+        Route::get('', 'UserController@index')->name('users.index');
         Route::get('/create', 'UserController@create')->name("users.create");
         Route::post('', 'UserController@store')->name("users.store");
         Route::get('/{user}', 'UserController@show')->name("users.show");

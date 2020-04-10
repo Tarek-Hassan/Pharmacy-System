@@ -10,8 +10,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -24,9 +23,9 @@ class UserController extends Controller
 
     //get one user
     public function show($user){
-        if ($user != auth()->user()->id){
-            return "you re not autherized";
-       }
+        return response()->json([
+            'message'=>"you are not autherized"
+        ]);
         return new UserResource(User::find($user));
     }
 
@@ -43,7 +42,7 @@ class UserController extends Controller
             $file=$request->file('profile_pic');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $file->move('prescription/',$filename);
+            $file->move('pics/',$filename);
         }
         $request->profile_pic=$filename;
         $user = User::create([
@@ -81,18 +80,29 @@ class UserController extends Controller
                 'message'=>"you cannot change email"
             ]);
        }
-
+    //    dd($request->all());
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
         if ($request->hasfile('profile_pic')){
             $file=$request->file('profile_pic');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $file->move('prescription/',$filename);
-            $request->profile_pic=$filename;
+            $file->move('pics/',$filename);
+            // $request->profile_pic=$filename;
+        
         }
         
-        User::find($user)->update($request->all());
+        User::find($user)->update([
+            'name'=>$request->name,
+            'password'=>$request->password,
+            'password_confirmation'=>$request->password_confirmation,
+            'profile_pic'=>$filename,
+            'national_id'=>$request->national_id,
+            'gender'=>$request->gender,
+            'mobile'=>$request->mobile,
+            'birth_date'=>$request->birth_date
+
+        ]);
 
         return response()->json($user, 200);
     }

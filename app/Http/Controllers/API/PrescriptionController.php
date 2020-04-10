@@ -56,9 +56,10 @@ class PrescriptionController extends Controller
 
 
     public function update(Request $request, $id){
-        dd($request->all());
+        // dd($request->all());
         $address=Prescription::find($id);
-
+        dd($address);
+       
         $order=Order::find($address->delivery_address_id);
        
         dd($order->status);
@@ -68,7 +69,7 @@ class PrescriptionController extends Controller
         }
         
         $image=$request->file('img');
-        dd($image);
+        // dd($image);
         if($image !=''){
             $this->validate($request,[
                 'img' =>'required',
