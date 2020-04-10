@@ -26,7 +26,11 @@ class MedicineOrderController extends Controller
                $data = MedicineOrder::latest()->get();
                return Datatables::of($data)
                        ->addIndexColumn()
+                    //    ->addColumn('medicine_id', function($row){
+                    //     return $row->medicine;
+                    //    })
                        ->addColumn('action', function($row){
+
                            // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                            $button = '&nbsp;&nbsp;&nbsp;<a href="medicineorders/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
@@ -34,6 +38,7 @@ class MedicineOrderController extends Controller
                        })
                        ->rawColumns(['action'])
                        ->make(true);
+
            }
          
            return view('medicineorders.index');
@@ -44,6 +49,7 @@ class MedicineOrderController extends Controller
             $orders = Order::all();
             $users = User::all();
             $pharmacies = Pharmacy::all();
+            
            
            
            
@@ -53,13 +59,15 @@ class MedicineOrderController extends Controller
             'orders' => $orders,
             'users' => $users,
             'pharmacies' => $pharmacies,
+            
                
            ]);
        }
        public function store(Request $request) {
             // dd($request->all());
         //    $orders=Order::create($request->all());
-            Order::create([
+        
+        MedicineOrder::create([
                 'medicine_id' => $request->medicine_id,
                 'order_id' => $request->order_id,
                 'user_id' => $request->user_id,
@@ -70,24 +78,24 @@ class MedicineOrderController extends Controller
            return redirect()->route('medicineorders.index');
        }
        public function show($id) {
-           $orders=Order::findOrFail($id);
+           $orders=MedicineOrder::findOrFail($id);
            return view('medicineorders.show', compact('medicineorders'));
        }
    
    
        public function edit(string $id) {
-           $orders=Order::findOrFail($id);
+           $orders=MedicineOrder::findOrFail($id);
            return view('medicineorders.edit', compact('medicineorders'));
        }
    
        public function update(MedicineOrderRequest $request, $id) {
-           $OrderUpdate = Order::findOrFail($id);
+           $OrderUpdate = MedicineOrder::findOrFail($id);
            $OrderUpdate->update($request->all());
            $OrderUpdate->fresh();
            return redirect()->route('medicineorders.index');
        }
        public function destroy($id) {
-           $orders=Order::find($id)->delete();
+           $orders=MedicineOrder::find($id)->delete();
            return redirect()->route('medicineorders.index');
        }
 }

@@ -22,7 +22,7 @@
 
                   <div class="form-group">
                     Medicine Name
-                    <select class="custom-select" name="user_id" >
+                    <select class="custom-select" name="_id" >
                       @foreach($medicines as $medicine)
                         <option value="{{$medicine->id}}">{{$medicine->medicine_name}}</option>
                       @endforeach

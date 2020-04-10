@@ -40,6 +40,15 @@
                     <label for="exampleInputaddress">Pharmacy_Id</label>
                     <input type="text" name="pharmacy_id" value="{{$orders->pharmacy_id}}" class="form-control" id="exampleInputaddress" placeholder="Enter Price">
                   </div> -->
+                  {{--dd($medicineorder)--}}
+                  <div class="form-group">
+                    <label for="exampleInputaddress">quantity</label>
+                    <input type="text" name="quantity" value="{{ $medicineorder->quantity }}" class="form-control" id="exampleInputaddress" placeholder="Enter quantity">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputaddress">total_price</label>
+                    <input type="text" name="total_price" value="{{ $medicineorder->total_price }}"class="form-control" id="exampleInputaddress" placeholder="Enter total_price">
+                  </div>
                   <div class="form-group">
                     Pharmacy Name
                     <select class="custom-select" name="pharmacy_id" >
@@ -61,6 +70,15 @@
                       @endforeach
                     </select>
 
+                   </div>
+
+                   <input type="hidden" name="user_id" value="1"/>
+                  <div class="form-group">
+                    User Name
+                    <select class="custom-select" name="user_id" > 
+                      @foreach($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                      @endforeach                     </select>
                    </div>
                  
                 </div>

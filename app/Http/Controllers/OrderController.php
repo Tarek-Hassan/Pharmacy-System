@@ -7,6 +7,9 @@ use App\Order;
 use App\Doctor;
 use App\Pharmacy;
 use App\Http\Requests\OrderRequest;
+use App\Medicine;
+use App\MedicineOrder;
+use App\User;
 use DataTables;
 
 class OrderController extends Controller
@@ -39,24 +42,33 @@ class OrderController extends Controller
        public function create() {
            $pharmacies = Pharmacy::all();
            $doctors = Doctor::all();
+           $medicines = Medicine::all();
+           $users = User::all();
         //    dd($doctors);
            return view('orders.create',[
                'pharmacies' => $pharmacies,
                'doctors' => $doctors,
+               'medicines' => $medicines,
+               'users' => $users,
 
            ]);
        }
        public function store(Request $request) {
         //    dd($request->all());
-        //    $orders=Order::create($request->all());
-            Order::create([
-                'delivery_address' => $request->delivery_address,
-                'is_insured' => $request->is_insured,
-                'status' => $request->status,
-                'creator_type' => $request->creator_type,
-                'pharmacy_id' => $request->pharmacy_id,
-                'doctor_id' => $request->doctor_id,
-            ]);
+           $orders=Order::create($request->all());
+           $request['order_id']=$orders->id;
+            //   dd($request->all());
+           $ord=MedicineOrder::create($request->all());
+           
+
+            // Order::create([
+            //     'delivery_address' => $request->delivery_address,
+            //     'is_insured' => $request->is_insured,
+            //     'status' => $request->status,
+            //     'creator_type' => $request->creator_type,
+            //     'pharmacy_id' => $request->pharmacy_id,
+            //     'doctor_id' => $request->doctor_id,
+            // ]);
            return redirect()->route('orders.index');
        }
        public function show($id) {
@@ -68,8 +80,11 @@ class OrderController extends Controller
        public function edit(string $id) {
         $pharmacies = Pharmacy::all();
         $doctors = Doctor::all();
-           $orders=Order::findOrFail($id);
-           return view('orders.edit', compact('orders','doctors','pharmacies'));
+        $medicines = Medicine::all();
+           $users = User::all();
+           $medicineorder=MedicineOrder::where('order_id',$id)->first();
+        $orders=Order::findOrFail($id);
+           return view('orders.edit', compact('orders','medicineorder','doctors','pharmacies','medicines','users'));
        }
    
        public function update(OrderRequest $request, $id) {

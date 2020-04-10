@@ -25,7 +25,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputarea">Image</label>
-                    <input type="file"  name="img" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
+                    <input type="file" accept="image/jpeg" name="img" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Email</label>

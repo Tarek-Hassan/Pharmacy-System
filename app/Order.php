@@ -26,4 +26,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\Doctor');
     }
+
+    public function medicine()
+    {
+        // return $this->belongsToMany('App\MedicineOrder','medicine_orders','order_id','medicine_id',);
+        return $this->belongsToMany('App\MedicineOrder');
+    }
 }

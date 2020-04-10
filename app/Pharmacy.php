@@ -8,10 +8,13 @@ class Pharmacy extends Model
 {
     //
     protected $fillable = [
-        'email',
+        'national_id',
         'pharmacy_name',
-        'password',
-        'national_id'
+        'img',
+        'email',
+        'password',   
+        'priority',
+        'address_id',  
     ];
     
     
