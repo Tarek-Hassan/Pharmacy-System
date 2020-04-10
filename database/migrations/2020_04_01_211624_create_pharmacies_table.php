@@ -14,11 +14,8 @@ class CreatePharmaciesTable extends Migration
     public function up()
     {
         Schema::create('pharmacies', function (Blueprint $table) {
-<<<<<<< HEAD
             
-=======
             //img not added
->>>>>>> 53f0ad8c1cb9ac6d4a84e6f2ad03b87b50385d9c
             $table->id();
             $table->unsignedInteger('national_id');
             $table->string('pharmacy_name',100);

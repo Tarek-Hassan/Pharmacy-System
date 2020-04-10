@@ -25,6 +25,7 @@
         </tbody>
     </table>
 </div>
+<!-- attia -->
 <!-- alret form to confirm delete  -->
 <div class="modal model-danger fade" id="delete" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

@@ -44,6 +44,7 @@
                     <label for="exampleInputaddress">Priority</label>
                     <input type="text" name="priority" class="form-control" id="exampleInputpriority" placeholder="Enter Priority">
                   </div>
+                  
                   <div class="form-group">
                     <label for="exampleInputaddress">Image</label>
                     <input type="file" name="img" accept = "image/jpeg" class="form-control" id="exampleInputimg" placeholder="Enter image">
