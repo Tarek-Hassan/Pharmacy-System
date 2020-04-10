@@ -1,7 +1,7 @@
 @include('admin.header')
-@section('title','Login')
+@section('title','Doctor Login')
 
-<body class="hold-transition login-page" style="background-image: url({{asset('control')}}/media/img/bg/bg8.jpg);">
+<body class="hold-transition login-page" style="background-image: url({{asset('control')}}/media/img/bg/bg7.jpg);">
     <div class="login-box">
     <div class="m-login__logo my-3">
 					<a href="#">
@@ -11,11 +11,10 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-            <!-- <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div> -->
-                <p class="login-box-msg">  Sign in to start your session</p>
+                <p class="login-box-msg">      Sign in As a Doctor to start your session</p>
                 @include('admin.error')
                 @include('admin.tab')
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('doctor.login') }}" method="post">
                 @csrf   
                 <div class="input-group mb-3">
                         <input type="email" class="form-control" class="form-control m-input @error('email') is-invalid @enderror"    value="{{ old('email') }}" name="email" placeholder="Email">
@@ -51,16 +50,27 @@
                     </div>
                 </form>
 
+                <!-- <div class="social-auth-links text-center mb-3">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div> -->
+                <!-- /.social-auth-links -->
+
                 <p class="mb-1">
                 @if (Route::has('password.request'))
-								<a href="{{ route('password.request') }}"  class="m-link">
+								<a href="{{ route('doctor.password.request') }}"  class="m-link">
 									Forget Password ?
 								</a>
 								@endif
                 </p>
-                <p class="mb-0">
-
-                </p>
+                <!-- <p class="mb-0">
+                    <a href="{{-- route('doctor.register') --}}" class="text-center">Register a new membership</a>
+                </p> -->
             </div>
             <!-- /.login-card-body -->
         </div>

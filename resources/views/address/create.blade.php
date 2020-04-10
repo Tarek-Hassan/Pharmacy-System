@@ -19,6 +19,14 @@
                     <form method="POST" action="{{route('address.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+                        <div class="form-group">
+                                <label for="opens">Chcoose Area</label>
+                                <select id="opens" class="form-control" name="area_id">
+                                    @foreach ($areas as $area)
+                                    <option value="{{$area->id}}" >{{$area->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
                             <div class="form-group">
                                 <label for="exampleInputaddress">Street Name</label>

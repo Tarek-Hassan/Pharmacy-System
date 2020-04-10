@@ -1,5 +1,5 @@
 @include('admin.header')
-@section('title','Sign Up')
+@section('title','pharmacy Sign Up')
 <body class="hold-transition register-page" style="background-image: url({{asset('control')}}/media/img/bg/bg8.jpg);">
 <div class="register-box">
 <div class="m-login__logo my-3">
@@ -11,13 +11,8 @@
   <div class="card">
     <div class="card-body register-card-body">
       @include('admin.error')
-      <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Register') }}</div>
       <p class="login-box-msg">Enter your details to create your account:</p>
-      @isset($url)
-      <form action="{{-- url('register//$url') --}}" method="post">
-      @else
-      <form action="{{-- route('register') --}}" method="post">
-      @endisset
+      <form action="{{-- route('pharmacy.register') --}}" method="post">
       @csrf  
       <div class="input-group mb-3">
           <input type="text"  class="form-control m-input @error('name') is-invalid @enderror" id="name"
@@ -89,7 +84,7 @@
         </a>
       </div> -->
 
-      <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+      <a href="{{ route('pharmacy.login') }}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\doctor;
 
-use App\Doctor;
 use App\Http\Controllers\Controller;
-use App\Pharmacy;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -41,9 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
         $this->middleware('guest:doctor');
-        $this->middleware('guest:pharmacy');
     }
 
     /**
@@ -75,51 +70,4 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    /**
- * @return Factory|View
- */
-public function showDoctorRegisterForm()
-{
-    return view('auth.register', ['url' => 'doctor']);
-}
- 
-// /**
-//  * @param Request $request
-//  *
-//  * @return RedirectResponse
-//  */
-protected function createDoctor(Request $request)
-{
-    $this->validator($request->all())->validate();
-    Doctor::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
-    return redirect()->intended('login/doctor');
-}
- 
-//  /**
-//  * @return Factory|View
-//  */
-public function showPharmacyRegisterForm()
-{
-    return view('auth.register', ['url' => 'pharmacy']);
-}
- 
-// /**
-//  * @param Request $request
-//  *
-//  * @return RedirectResponse
-//  */
-protected function createPharmacy(Request $request)
-{
-    $this->validator($request->all())->validate();
-    Pharmacy::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
-    return redirect()->intended('login/pharmacy');
-}
 }

@@ -3,7 +3,7 @@
 @section('section_title','Area')
 @section('content')
 
-<div class="container">
+<div class="container my-3">
     <a href="{{url('areas/create')}}" class="edit btn btn-primary btn-sm">AddArea</a>
     <br>
     <br>

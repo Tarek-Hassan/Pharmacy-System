@@ -25,10 +25,4 @@ class HomeController extends Controller
     {
         return view('admin.index');
     }
-//     public function enqueue(Request $request)
-// {
-//      $details = ['email' => 'recipient@example.com'];
-//     //  SendEmail::dispatch($details);
-//      SendEmail::dispatchNow($details);
-// }
 }

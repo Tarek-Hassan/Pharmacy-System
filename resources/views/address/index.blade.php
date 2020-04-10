@@ -13,6 +13,7 @@
             <tr>
             
                 <th>ID</th>
+                <th>Area Name</th>
                 <th>Street Name</th>
                 <th>Building Number</th>
                 <th>Floor Number</th>
@@ -73,6 +74,10 @@
             columns: [{
                     data: 'id',
                     name: 'id'
+                },
+                {
+                    data: 'areaname',
+                    name: 'areaname'
                 },
                 {
                     data: 'street_name',

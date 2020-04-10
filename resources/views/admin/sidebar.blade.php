@@ -1,6 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
+
         <img src="{{asset('control')}}/media/img/logo/logo2.png" alt="PhARmAcY Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PhARmAcY</span>
@@ -11,13 +12,31 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
+            @auth("web")
                 <img src="{{ Auth::user()->profile_pic ? Auth::user()->profile_pic : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
-                <!-- <img src="{{asset('control')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
-                    alt="User Image"> -->
+                    @endauth
+            @auth("doctor")
+                <img src="{{ Auth::guard('doctor')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
+                    class="img-circle elevation-2" alt="User Image">
+                    @endauth
+            @auth("pharmacy")
+                <img src="{{ Auth::guard('pharmacy')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
+                    class="img-circle elevation-2" alt="User Image">
+                    @endauth
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->name}}</a>
+
+                @auth("web")
+                <a href="#" class="d-block">{{Auth::user()->name }}</a>
+                @endauth
+                @auth("doctor")
+                <a href="#" class="d-block">{{ Auth::guard('doctor')->user()->name }}</a>
+                @endauth
+                @auth("pharmacy")
+                <a href="#" class="d-block">{{ Auth::guard('doctor')->user()->name }}</a>
+                @endauth
+
             </div>
         </div>
 
@@ -103,9 +122,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{url('address')}}" class="nav-link">
-                    <i class="nav-icon fas fa-street-view"></i>
+                        <i class="nav-icon fas fa-street-view"></i>
                         <p>
-                        User Addresses
+                            User Addresses
                         </p>
                     </a>
                 </li>

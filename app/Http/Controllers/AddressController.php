@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Address;
+use App\Area;
 use App\Http\Requests\AddressRequest;
 use Yajra\DataTables\DataTables ;
 
@@ -21,6 +22,7 @@ class AddressController extends Controller
                     ->addIndexColumn()
                     ->addColumn('main', function($row){ return $row->is_main==1 ? 'Main' :'NoT Main';})
                     ->addColumn('username', function($row){ return $row->user->name;})
+                    ->addColumn('areaname', function($row){ return $row->area->name;})
                     ->addColumn('action', function($row){
                         // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                         $button = '&nbsp;&nbsp;&nbsp;<a href="address/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
@@ -36,15 +38,17 @@ class AddressController extends Controller
 
     public function create() {
         
-        return view('address.create');
+        $areas=Area::all();
+        return view('address.create',compact('areas'));
     }
     public function store(AddressRequest $request) {
         $address=Address::create($request->all());
         return redirect()->route('address.index');
     }
     public function edit(string $id) {
+        $areas=Area::all();
         $address=Address::findOrFail($id);
-        return view('address.edit', compact('address'));
+        return view('address.edit', compact('address','areas'));
     }
 
     public function update(AddressRequest $request, $id) {

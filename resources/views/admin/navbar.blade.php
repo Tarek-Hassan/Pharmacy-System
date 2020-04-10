@@ -25,6 +25,7 @@
     </form>
 
     <!-- Right navbar links -->
+    @auth
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -69,4 +70,5 @@
                     class="fas fa-th-large"></i></a>
         </li>
     </ul>
+    @endauth
 </nav>

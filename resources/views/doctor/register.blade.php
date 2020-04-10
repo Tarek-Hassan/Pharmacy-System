@@ -11,13 +11,8 @@
   <div class="card">
     <div class="card-body register-card-body">
       @include('admin.error')
-      <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Register') }}</div>
       <p class="login-box-msg">Enter your details to create your account:</p>
-      @isset($url)
-      <form action="{{-- url('register//$url') --}}" method="post">
-      @else
-      <form action="{{-- route('register') --}}" method="post">
-      @endisset
+      <form action="{{-- route('doctor.register') --}}" method="post">
       @csrf  
       <div class="input-group mb-3">
           <input type="text"  class="form-control m-input @error('name') is-invalid @enderror" id="name"
@@ -89,7 +84,7 @@
         </a>
       </div> -->
 
-      <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+      <a href="{{ route('doctor.login') }}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
