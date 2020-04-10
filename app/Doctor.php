@@ -13,15 +13,19 @@ class Doctor extends Authenticatable
     protected $guard='doctor';
     
     protected $fillable = [
-        'email',
-        'name',
-        'password',
         'national_id',
-        'pharmacy_id' 
+        'doctor_name',
+        'img',
+        'email',
+        'password',
+        'pharmacy_id' //for now it is fillable
     ];
+
+
     protected $hidden = [
         'password',
     ];
+    
     public function pharmacy()
     {
         return $this->belongsTo('App\Pharmacy');

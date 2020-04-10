@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 
 Route::prefix('/users')->middleware(['auth',])->group(function(){
-        Route::get('', 'UserController@index')->name('users.index');//->middleware('verified');
+        Route::get('', 'UserController@index')->name('users.index');
         Route::get('/create', 'UserController@create')->name("users.create");
         Route::post('', 'UserController@store')->name("users.store");
         Route::get('/{user}', 'UserController@show')->name("users.show");
@@ -63,6 +63,54 @@ Route::prefix('/markAsRead')->middleware(['auth',])->group(function(){
 //         Route::get('', function(){
 //                 auth()->user()->notifications()->delete();
 // 	                return redirect()->back();
+Route::prefix('/medicines')->middleware(['auth',])->group(function(){
+        Route::get('', 'MedicineController@index')->name('medicines.index');
+        Route::get('/create', 'MedicineController@create')->name("medicines.create");
+        Route::post('', 'MedicineController@store')->name("medicines.store");
+        Route::get('/{medicine}', 'MedicineController@show')->name("medicines.show");
+        Route::get('/{medicine}/edit', 'MedicineController@edit')->name("medicines.edit");
+        Route::put('/{medicine}', 'MedicineController@update')->name("medicines.update");
+        Route::delete('/{medicine}', 'MedicineController@destroy')->name("medicines.destroy");
+});
+Route::prefix('/orders')->middleware(['auth',])->group(function(){
+        Route::get('', 'OrderController@index')->name('orders.index');
+        Route::get('/create', 'OrderController@create')->name("orders.create");
+        Route::post('', 'OrderController@store')->name("orders.store");
+        Route::get('/{order}', 'OrderController@show')->name("orders.show");
+        Route::get('/{order}/edit', 'OrderController@edit')->name("orders.edit");
+        Route::put('/{order}', 'OrderController@update')->name("orders.update");
+        Route::delete('/{order}', 'OrderController@destroy')->name("orders.destroy");
+});
+Route::prefix('/medicineorders')->middleware(['auth',])->group(function(){
+        Route::get('', 'MedicineOrderController@index')->name('medicineorders.index');
+        Route::get('/create', 'MedicineOrderController@create')->name("medicineorders.create");
+        Route::post('', 'MedicineOrderController@store')->name("medicineorders.store");
+        Route::get('/{medicineorder}', 'MedicineOrderController@show')->name("medicineorders.show");
+        Route::get('/{medicineorder}/edit', 'MedicineOrderController@edit')->name("medicineorders.edit");
+        Route::put('/{medicineorder}', 'MedicineOrderController@update')->name("medicineorders.update");
+        Route::delete('/{medicineorder}', 'MedicineOrderController@destroy')->name("medicineorders.destroy");
+});
+Route::prefix('/doctors')->middleware(['auth',])->group(function(){
+        Route::get('', 'DoctorController@index')->name('doctors.index');
+        Route::get('/create', 'DoctorController@create')->name("doctors.create");
+        Route::post('', 'DoctorController@store')->name("doctors.store");
+        Route::get('/{doctor}', 'DoctorController@show')->name("doctors.show");
+        Route::get('/{doctor}/edit', 'DoctorController@edit')->name("doctors.edit");
+        Route::put('/{doctor}', 'DoctorController@update')->name("doctors.update");
+        Route::delete('/{doctor}', 'DoctorController@destroy')->name("doctors.destroy");
+});       
+Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
+        Route::get('', 'PharmacyController@index')->name('pharmacies.index');
+        Route::get('/create', 'PharmacyController@create')->name("pharmacies.create");
+        Route::post('', 'PharmacyController@store')->name("pharmacies.store");
+        Route::get('/{pharmacy}', 'PharmacyController@show')->name("pharmacies.show");
+        Route::get('/{pharmacy}/edit', 'PharmacyController@edit')->name("pharmacies.edit");
+        Route::put('/{pharmacy}', 'PharmacyController@update')->name("pharmacies.update");
+        Route::delete('/{pharmacy}', 'PharmacyController@destroy')->name("pharmacies.destroy");
+});
+// Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('', 'HomeController@index')->name('home');
 
 //         })->name('deleteNotification');
 //     });
@@ -79,35 +127,20 @@ Route::get('/notify', function () {
         $user->notify(new \App\Notifications\PriceNotification($details));
     });
     
-  
-    // =================================================================================================
-//     Route::get('', 'HomeController@index')->name('doctor.index');
-// =================================================================================================
-// Route::get('/users', 'UserController@index')->name('users.index');
-// Route::get('', 'HomeController@index')->name('home');
-// Route::prefix('doctor')->group(function() {
-        //         Auth::routes(['register' => false]);
-        //      });
-        //         Route::namespace('Doctor')->name('doctor.')->prefix('doctor')->group(function () {
-                //                 Route::get('login', 'DoctorAuthController@getLogin')->name('login');
-                //                 Route::post('login', 'DoctorAuthController@postLogin');
-                //         });
-                //         Route::middleware('auth:doctor')->group(function(){
-                        // Route::get('/home', 'HomeController@index')->name('home');
-                        //                 //here all your admin routes
-                        
-                        //               });
                         
 // =================================================================================================
-Route::GET('',function(){return view('admin.index');})->name('doctor.index')->middleware('auth:doctor');
-Route::GET('/home',function(){return view('admin.index');})->name('doctor.index')->middleware('auth');
+Route::prefix('')->middleware(['auth:doctor',])->group(function(){
+Route::GET('',function(){return view('admin.index');})->name('doctor.index');
+Route::GET('/home',function(){return view('admin.index');})->name('doctor.index');
 Route::GET('doctor','doctor\LoginController@showLoginForm')->name('doctor.login');
 Route::POST('doctor','doctor\LoginController@login');
 Route::POST('doctor-password/email','doctor\ForgotPasswordController@sendResetLinkEmail')->name('doctor.password.email');
 Route::GET('doctor-password/reset','doctor\ForgotPasswordController@showLinkRequestForm')->name('doctor.password.request');
 Route::POST('doctor-password/reset','doctor\ResetPasswordController@reset');
 Route::GET('doctor-password/reset/{token}','doctor\ResetPasswordController@showResetForm')->name('doctor.password.reset');
+});
 // =================================================================================================
+Route::prefix('')->middleware(['auth:pharmacy',])->group(function(){
 Route::GET('',function(){return view('admin.index');})->name('pharmacy.index')->middleware('auth:pharmacy');
 Route::GET('pharmacy','pharmacy\LoginController@showLoginForm')->name('pharmacy.login');
 Route::POST('pharmacy','pharmacy\LoginController@login');
@@ -115,8 +148,4 @@ Route::POST('pharmacy-password/email','pharmacy\ForgotPasswordController@sendRes
 Route::GET('pharmacy-password/reset','pharmacy\ForgotPasswordController@showLinkRequestForm')->name('pharmacy.password.request');
 Route::POST('pharmacy-password/reset','pharmacy\ResetPasswordController@reset');
 Route::GET('pharmacy-password/reset/{token}','pharmacy\ResetPasswordController@showResetForm')->name('pharmacy.password.reset');
-// Route::GET('doctor-password/confirm','doctor\ConfirmPasswordController@showConfirmForm')->name('doctor.password.confirm');
-// Route::POST('doctor-password/confirm','doctor\ConfirmPasswordController@confirm ');
-// Route::GET('doctor-register','doctor\RegisterController@showRegistrationForm')->name('doctor.register');
-// Route::POST('doctor-register','doctor\RegisterController@register'); 
-Route::GET('/a',function(){return view('layouts.login');});
+});

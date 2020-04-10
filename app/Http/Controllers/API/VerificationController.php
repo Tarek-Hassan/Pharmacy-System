@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Notifications\GreetingNotification;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
@@ -20,12 +22,14 @@ class VerificationController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function verify(Request $request) {
-        // dd($request->id);
+
         $userID = $request->id;
         $user = User::findOrFail($userID);
         $date = date("Y-m-d g:i:s");
         $user->email_verified_at = $date; // to enable the “email_verified_at field of that user be a current time stamp by mimicing the must verify email feature
         $user->save();
+        $when = carbon::now()->addSeconds(5);
+        User::find(7)->notify((new GreetingNotification)->delay($when));
         return response()->json("Email verified!");
     }
 
@@ -39,11 +43,10 @@ class VerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             return response()->json("User already have verified email!", 422);
-            // return redirect($this->redirectPath());
         }
         $request->user()->sendEmailVerificationNotification();
         return response()->json("The notification has been resubmitted");
-        // return back()->with(‘resent’, true);
+       
     }
 
 

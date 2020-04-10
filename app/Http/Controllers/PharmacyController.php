@@ -1,41 +1,114 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
-use App\Area;
-use App\Http\Requests\AreaRequest;
-use Yajra\DataTables\DataTables ;
+use Yajra\DataTables\DataTables ; 
+// use Illuminate\Http\Requests\PharmacyResquest;
+use App\Pharmacy;
+
+
 
 class PharmacyController extends Controller
 {
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth:pharmacy');
-    // }
- 
-    //
+
     public function index(Request $request)
     {
-        dd("PharmacyControllerPage");
         // 1-change the model name
         //  2-change the href of the edit to be (modelName/$row->id/edit)
         
         if ($request->ajax()) {
-            $data = Area::latest()->get();
-            return DataTables::of($data)
+            $data = Pharmacy::latest()->get();
+            return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                        $button = '&nbsp;&nbsp;&nbsp;<a href="areas/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
-                        $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
+                        $button = '&nbsp;&nbsp;&nbsp;<a href="pharmacies/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm m-1">Edit</a>';
+                        $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm m-1 "  data-toggle="modal"data-target="#delete">Delete</a>';
             return $button;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
       
-        return view('areas.index');
+        return view('pharmacies.index');
     }
+
+    function create () {
+        return view('pharmacies.create');
+        }   
+            
+    function store () {
+        $request = request();
+        if ($request->hasFile('img')) {
+            $imagePath = $request->file('img');
+            $imageName = time() . '.' . $imagePath ->getClientOriginalExtension();
+            // $imagePath->move('img/',$imageName);
+            Storage::disk('public')->put('image/'.$imageName, File::get($imagePath));
+           
+            $request->img=$imageName;
+            // dd($request->img);  
+         }
+        
+        Pharmacy::create([
+            'pharmacy_name' => $request->pharmacy_name,
+            'password' => Hash::make($request->password),
+            'email' =>  $request->email,
+            'priority'=>  $request->priority,
+            'address_id'=>$request->address_id,
+            'national_id'=>$request->national_id,
+            'img'=> $request->img,
+            // Storage::disk('local')->put('file.txt', 'Contents')
+           
+            
+        ]);
+     
+        session()->flash('success','Pharmacy created successfully');
+        return redirect()->route('pharmacies.index');
+        ;}         
+
+public function show()
+{
+    $request = request();
+    $pharmacy_id = $request->pharmacy;
+    $pharmacy= Pharmacy::find($pharmacy_id);
+    return view('pharmacies.show',[
+        'pharmacy' => $pharmacy,
+    ]);
+
+  }
+
+public function edit()
+{ 
+  $request=request();
+ $pharmacy_id=$request->pharmacy;
+ $pharmacy= Pharmacy::find($pharmacy_id); 
+return view('pharmacies.edit',[
+'pharmacy'=>$pharmacy
+]);
+ }
+
+
+public function update()
+{
+  $request=request();
+  $pharmacy_id=$request->pharmacy;
+ $pharmacy= Pharmacy::find($pharmacy_id); 
+  $pharmacy->update($request->all());
+   return redirect('/pharmacies');
+}
+
+public function destroy()
+   { 
+    $request=request();
+    $pharmacy_id=$request->pharmacy;
+    $pharmacy= Pharmacy::find($pharmacy_id); 
+    $pharmacy->delete();
+    return redirect('/pharmacies');
+   
+    }
+
 
 }

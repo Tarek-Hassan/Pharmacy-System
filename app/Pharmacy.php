@@ -12,10 +12,14 @@ class Pharmacy extends Authenticatable
     protected $guard='pharmacy';
     //
     protected $fillable = [
+        'national_id',
+        'pharmacy_name',
+        'img',
         'email',
-        'name',
-        'password',
-        'national_id'
+        'password',   
+        'priority',
+        'address_id',
+          
     ];
     
     protected $hidden = [
@@ -24,5 +28,10 @@ class Pharmacy extends Authenticatable
     public function address()
     {
         return $this->belongsTo('App\Address');
+    }
+    
+    public function area()
+    {
+        return $this->belongsTo('App\Area');
     }
 }

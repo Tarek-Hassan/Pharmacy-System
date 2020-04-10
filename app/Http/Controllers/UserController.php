@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\GreetingNotification;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
-use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -35,8 +33,7 @@ class UserController extends Controller
     }
 
     public function create() {
-        $when = carbon::now()->addSeconds(5);
-        User::find(7)->notify((new GreetingNotification)->delay($when));
+
         return view('users.create');
     }
     public function store(Request $request) {
