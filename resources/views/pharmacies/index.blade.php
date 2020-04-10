@@ -85,7 +85,7 @@
                 },
                 {
                     data: 'img',
-                    name: 'img', render:function(url){ return '<img src="{{url("image/")}}'+'/'+''+url+'" width = "50" height="50" />'; }
+                    name: 'img', render:function(url){ return '<img src="{{url("uploads/image/")}}'+'/'+''+url+'" width = "50" height="50" />'; }
                 },
                 {
                     data: 'email',

@@ -49,3 +49,7 @@ Route::delete('address/{address}', 'API\AddressController@destroy');
 //prescription/order
 Route::post('/orders','API\PrescriptionController@store');
 Route::put('/orders/{id}','API\PrescriptionController@update');
+
+
+//order details
+Route::get('/order-details', 'API\OrderDetailsController@index');

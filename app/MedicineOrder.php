@@ -21,24 +21,24 @@ class MedicineOrder extends Model
     
     public function pharmacy()
     {
-        return $this->belongsToMany('App\Pharmacy');
+        return $this->belongsTo('App\Pharmacy');
     }
     
     
     public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\User');
     }
     
     
     public function order()
     {
-        return $this->belongsToMany('App\Order');
+        return $this->belongsTo('App\Order');
     }
     
     
     public function medicine()
     {
-        return $this->belongsToMany('App\Medicine');
+        return $this->belongsTo('App\Medicine');
     }
 }
