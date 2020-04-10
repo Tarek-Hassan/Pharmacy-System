@@ -18,7 +18,7 @@ class PharmacyResource extends JsonResource
             'id'=>$this->id,
             'pharmacy_name'=>$this->pharmacy_name,
             'pharmacy_avatar'=>$this->img,
-            'pharmacy_address'=> new AreaResource($this->area)
+            'pharmacy_address'=> new AreaResource($this->address)
         ];
     }
 }

@@ -15,7 +15,7 @@ class AreaResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'address'=>$this->name
+            'address'=>$this->street_name
         ];
     }
 }

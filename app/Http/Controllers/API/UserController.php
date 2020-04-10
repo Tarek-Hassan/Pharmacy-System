@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\UserResource;
@@ -58,9 +59,6 @@ class UserController extends Controller
             'birth_date'=>$request->birth_date
 
         ]);
-        
-        
-        // $user= User::create($request->all());
         // verification
         $user->sendApiEmailVerificationNotification();
         $success["message"] = "Please confirm yourself by clicking on verify user button sent to you on your email";
@@ -70,12 +68,20 @@ class UserController extends Controller
 
 
     //put function
-    public function update(Request $request,$user)
+    public function update(UpdateUserRequest $request,$user)
     {
        //check if autherized user and updates only his data
         if ($user != auth()->user()->id){
-            return "you re not autherized";
+            return response()->json([
+                'message'=>"you are not autherized"
+            ]);
        }
+       if($request->email){
+            return response()->json([
+                'message'=>"you cannot change email"
+            ]);
+       }
+
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
         if ($request->hasfile('profile_pic')){

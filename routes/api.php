@@ -20,7 +20,9 @@ use Illuminate\Validation\ValidationException;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// Route::prefix('/modelName')->middleware(['auth',])->group(function(){
+        // ALLRoutesForThisModel
+// });
 
 //user routes and authentication
 Route::get('/users', 'API\UserController@index');
