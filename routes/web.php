@@ -42,6 +42,17 @@ Route::prefix('/areas')->middleware(['auth',])->group(function(){
         Route::put('/{area}', 'AreaController@update')->name("areas.update");
         Route::delete('/{area}', 'AreaController@destroy')->name("areas.destroy");
 });
+Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
+        Route::get('', 'PharmacyController@index')->name('pharmacies.index');
+        Route::get('/create', 'PharmacyController@create')->name("pharmacies.create");
+        Route::post('', 'PharmacyController@store')->name("pharmacies.store");
+        Route::get('/{pharmacy}', 'PharmacyController@show')->name("pharmacies.show");
+        Route::get('/{pharmacy}/edit', 'PharmacyController@edit')->name("pharmacies.edit");
+        Route::put('/{pharmacy}', 'PharmacyController@update')->name("pharmacies.update");
+        Route::delete('/{pharmacy}', 'PharmacyController@destroy')->name("pharmacies.destroy");
+});
 // Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('', 'HomeController@index')->name('home');
+
+
