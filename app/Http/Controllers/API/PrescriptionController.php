@@ -96,7 +96,10 @@ class PrescriptionController extends Controller
                     'message'=>'updated successfully'
                 ]);
         }else{
-            return Prescription::find($id)->update($request->all()); 
+            Prescription::find($id)->update($request->all());
+            return response()->json([
+                'message'=>'updated successfully'
+            ]); 
         }
     }
 }
