@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Area;
 use App\Http\Requests\AreaRequest;
-use DataTables;
+use Yajra\DataTables\DataTables ;
 
 class AreaController extends Controller
 {
@@ -17,7 +17,7 @@ class AreaController extends Controller
         
         if ($request->ajax()) {
             $data = Area::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
@@ -33,6 +33,7 @@ class AreaController extends Controller
     }
 
     public function create() {
+        
         return view('areas.create');
     }
     public function store(AreaRequest $request) {

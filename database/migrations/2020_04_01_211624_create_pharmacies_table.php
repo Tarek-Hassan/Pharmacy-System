@@ -14,12 +14,15 @@ class CreatePharmaciesTable extends Migration
     public function up()
     {
         Schema::create('pharmacies', function (Blueprint $table) {
+            
             //img not added
-            $table->id('national_id',15)->unique();
+            $table->id();
+            $table->unsignedInteger('national_id');
             $table->string('pharmacy_name',100);
             $table->string('img');
-            $table->string('password');
+            $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
             $table->string('priority');
             $table->unsignedInteger('address_id');
             $table->timestamps();
