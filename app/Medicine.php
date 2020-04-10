@@ -12,4 +12,9 @@ class Medicine extends Model
         'type',
         'price'
     ];
+    
+    public function order()
+    {
+        return $this->belongsToMany('App\MedicineOrder','medicine_orders','order_id','medicine_id');
+    }
 }

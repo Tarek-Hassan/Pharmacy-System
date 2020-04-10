@@ -28,7 +28,6 @@ class PrescriptionController extends Controller
                 
                 $extention=$image->getClientOriginalExtension();
                 $filename=time().'.'.$extention;
-                // Storage::disk('public')->put('prescription/'.$filename, File::get($image));
                 $image->move('prescription/',$filename);
                 $data[]=$filename;//store each img in the array
         
@@ -59,9 +58,9 @@ class PrescriptionController extends Controller
     public function update(Request $request, $id){
         dd($request->all());
         $address=Prescription::find($id);
-        // dd($address->delivery_address_id);
+
         $order=Order::find($address->delivery_address_id);
-        // dd(hello)
+       
         dd($order->status);
         
         if($order->status != "new"){

@@ -35,14 +35,14 @@ class UserController extends Controller
        //hash password
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        // $request['profile_pic']=Storage::disk('public')->put(storage_path('images'),$request['profile_pic']);
-        // dd($request->all());
+
+        
         // storing image in public/pics and changes its name
         if ($request->hasfile('profile_pic')){
             $file=$request->file('profile_pic');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            Storage::disk('public')->put('pics/'.$filename, File::get($file));
+            $file->move('prescription/',$filename);
         }
         $request->profile_pic=$filename;
         $user = User::create([
@@ -58,6 +58,8 @@ class UserController extends Controller
             'birth_date'=>$request->birth_date
 
         ]);
+        
+        
         // $user= User::create($request->all());
         // verification
         $user->sendApiEmailVerificationNotification();
@@ -70,11 +72,19 @@ class UserController extends Controller
     //put function
     public function update(Request $request,$user)
     {
-       if ($user != auth()->user()->id){
+       //check if autherized user and updates only his data
+        if ($user != auth()->user()->id){
             return "you re not autherized";
        }
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
+        if ($request->hasfile('profile_pic')){
+            $file=$request->file('profile_pic');
+            $extention=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extention;
+            $file->move('prescription/',$filename);
+            $request->profile_pic=$filename;
+        }
         
         User::find($user)->update($request->all());
 
@@ -86,8 +96,6 @@ class UserController extends Controller
         
         $user=User::find($user);
 
-        //trial to delete image
-        dd(Storage::disk('public')->delete('pics/'.$user->profile_pic));
 
         $user->delete();
 
