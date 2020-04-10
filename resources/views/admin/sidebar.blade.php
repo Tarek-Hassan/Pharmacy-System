@@ -112,6 +112,7 @@
                         </li>
                     </ul>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a href="{{url('areas')}}" class="nav-link">
                         <i class="nav-icon fas fa-map-marker-alt"></i>
@@ -120,6 +121,7 @@
                         </p>
                     </a>
                 </li>
+                @endauth
                 <li class="nav-item">
                     <a href="{{url('address')}}" class="nav-link">
                         <i class="nav-icon fas fa-street-view"></i>
