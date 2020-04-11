@@ -79,7 +79,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Pakages
-yajra/laravel-datatables-oracle
+1)yajra/laravel-datatables-oracle
+
+2)composer require stripe/stripe-php
+                this link to Test CardNumber (https://stripe.com/docs/testing#cards)
+3)composer require laravel/sanctum
+
+4)schedule
+    -php artisan schedule:run (ON LOCALHOST )
+    - * * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1(ON SERVER )
+5)queue    
+    -QUEUE_CONNECTION=database(env)
+    -php artisan queue:table
+    -php artisan migrate
+    -php artisan queue:work 
+6)NOtification
+    -php artisan notifications:table
+    --php artisan migrate
 
 
 

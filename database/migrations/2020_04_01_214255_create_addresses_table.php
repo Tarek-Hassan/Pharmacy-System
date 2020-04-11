@@ -19,11 +19,8 @@ class CreateAddressesTable extends Migration
             $table->string('building_number');
             $table->string('floor_number');
             $table->string('flat_number');
-            $table->unsignedInteger('is_main')->default(0); //true or false
+            $table->unsignedInteger('is_main')->default(0); 
             $table->unsignedInteger('user_id');
-            
-
-
             $table->timestamps();
         });
     }

@@ -27,7 +27,6 @@ class OrderController extends Controller
                return Datatables::of($data)
                        ->addIndexColumn()
                        ->addColumn('action', function($row){
-                           // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                            $button = '&nbsp;&nbsp;&nbsp;<a href="orders/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
                return $button;
@@ -44,7 +43,6 @@ class OrderController extends Controller
            $doctors = Doctor::all();
            $medicines = Medicine::all();
            $users = User::all();
-        //    dd($doctors);
            return view('orders.create',[
                'pharmacies' => $pharmacies,
                'doctors' => $doctors,
@@ -54,12 +52,12 @@ class OrderController extends Controller
            ]);
        }
        public function store(OrderRequest $request) {
-        //    dd($request->all());
+      
            $orders=Order::create($request->all());
            $request['order_id']=$orders->id;
-            //   dd($request->all());
+            
             $medicine = Medicine::find($request->medicine_id);
-            // dd($medicine);
+        
            $ord=MedicineOrder::create([
             'medicine_id' => $request->medicine_id,
             'order_id' => $request->order_id,
@@ -69,15 +67,15 @@ class OrderController extends Controller
             'total_price' => $medicine->price*$request->quantity,
            ]);
            
-
-            // Order::create([
-            //     'delivery_address' => $request->delivery_address,
-            //     'is_insured' => $request->is_insured,
-            //     'status' => $request->status,
-            //     'creator_type' => $request->creator_type,
-            //     'pharmacy_id' => $request->pharmacy_id,
-            //     'doctor_id' => $request->doctor_id,
-            // ]);
+           $ord=MedicineOrder::create($request->all());
+           //Notify Route this put in OrderController To NOtifiyPrice
+           $user = \App\User::find($request->user_id);
+           $orderno=$orders->id;
+           $price=$request->total_price;
+           $details = [
+                   'body'=>"Cost Of OrderNO. : $orderno  is $price $"
+           ];
+           $user->notify(new \App\Notifications\PriceNotification($details));
            return redirect()->route('orders.index');
        }
        public function show($id) {
@@ -107,5 +105,3 @@ class OrderController extends Controller
            return redirect()->route('orders.index');
        }
 }
-
-

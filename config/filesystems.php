@@ -53,20 +53,12 @@ return [
             // 'root' => storage_path('app/public'),
             // 'url' => env('APP_URL').'/storage',
             // 'visibility' => 'public',
+
             'driver' => 'local',
-<<<<<<< HEAD
-<<<<<<< HEAD
-            'root' => public_path(),'/uploads',
-            'url' => env('APP_URL'),'/public',
-=======
             'root' => public_path(), '/uploads',
             'url' => env('APP_URL').'/public',
->>>>>>> 53f0ad8c1cb9ac6d4a84e6f2ad03b87b50385d9c
-=======
-            'root' => public_path(),'/uploads',
-            'url' => env('APP_URL'),'/public',
->>>>>>> 14e89e32fd5952e4ea04c2b6fc8062062519035f
             'visibility' => 'public',
+        
         ],
 
         's3' => [

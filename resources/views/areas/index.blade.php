@@ -2,7 +2,8 @@
 @section('title','Area')
 @section('section_title','Area')
 @section('content')
-<div class="container">
+
+<div class="container my-3">
     <a href="{{url('areas/create')}}" class="edit btn btn-primary btn-sm">AddArea</a>
     <br>
     <br>
@@ -85,11 +86,9 @@
             ]
         });
         $(document).on("click", ".del", function () {
-            var myBookId = $(this).data('id');
-            console.log(myBookId);
+            var id = $(this).data('id');
             var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/areas/' + myBookId; // assign action 
-
+            deleteForm.action = '/areas/' + id; // assign action 
         });
     });
 

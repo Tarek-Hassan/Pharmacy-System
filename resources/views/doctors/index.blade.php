@@ -84,7 +84,7 @@
                     data: 'img',
                     name: 'img',
                     render: function(url){
-                        return '<img src="{{url("images/")}}'+'/'+''+url+'" height="50" width="50">';
+                        return '<img src="{{url("uploads/images/")}}'+'/'+''+url+'" height="50" width="50">';
                     }
                 },
                 {

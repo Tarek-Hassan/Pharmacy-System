@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use DataTables;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
+use UserRequest;
 class UserController extends Controller
 {
     //
@@ -13,14 +17,13 @@ class UserController extends Controller
     {
         // 1-change the model name
         //  2-change the href of the edit to be (modelName/$row->id/edit)
-        
+ 
         if ($request->ajax()) {
             $data = User::latest()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                        $button .= '&nbsp;&nbsp;&nbsp;<a href="users/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
+                        $button = '&nbsp;&nbsp;&nbsp;<a href="users/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
                         $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
             return $button;
                     })
@@ -32,10 +35,23 @@ class UserController extends Controller
     }
 
     public function create() {
+
         return view('users.create');
     }
+    
     public function store(Request $request) {
-        return view('users.index');
+        $request['password']=Hash::make($request->password);
+        if($request->hasfile('profile_pic'))
+        {
+            $file = $request->file('profile_pic');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            Storage::disk('public')->put('images/'.$filename, File::get($file));
+        }
+        $request['profile_pic']=$filename;
+        $user=User::create($request->all());
+        return redirect()->route('users.index');
+        // return view('users.index');
     }
     public function show($id) {
         $users=User::findOrFail($id);
@@ -49,6 +65,9 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $userUpdate = User::findOrFail($id);
+        $userUpdate->update($request->all());
+        $userUpdate->fresh();
         return redirect()->route('users.index');
     }
     public function destroy($id) {

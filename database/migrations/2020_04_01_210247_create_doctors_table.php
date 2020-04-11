@@ -23,6 +23,7 @@ class CreateDoctorsTable extends Migration
             $table->unsignedInteger('pharmacy_id');
             $table->timestamp('banned_at')->nullable();
             $table->timestamps();
+
         });
     }
 

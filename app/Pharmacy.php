@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pharmacy extends Model
+class Pharmacy extends Authenticatable
 {
+    use Notifiable;
+    protected $guard='pharmacy';
     //
     protected $fillable = [
         'national_id',
@@ -17,12 +21,11 @@ class Pharmacy extends Model
         'area_id',  
     ];
     
-    
-    public function address()
-    {
-        return $this->belongsTo('App\Address');
-    }
+    protected $hidden = [
+        'password',
+    ];
 
+    
     public function area()
     {
         return $this->belongsTo('App\Area');

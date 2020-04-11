@@ -14,17 +14,12 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Laravel\Sanctum\HasApiTokens;
 
 
-
-
-
-// class User extends Authenticatable implements MustVerifyEmail, BannableContract
-
-
-
 class Doctor extends Model implements BannableContract
 {
     use Bannable;
     //
+    protected $guard='doctor';
+    
     protected $fillable = [
         'national_id',
         'doctor_name',
@@ -45,9 +40,9 @@ class Doctor extends Model implements BannableContract
     }
 
     public function setPasswordAttribute($password)
-{
-$this->attributes['password'] = bcrypt($password);
-}
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 
  
 }

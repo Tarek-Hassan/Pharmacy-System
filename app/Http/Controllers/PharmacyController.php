@@ -49,11 +49,11 @@ class PharmacyController extends Controller
         if ($request->hasFile('img')) {
             $imagePath = $request->file('img');
             $imageName = time() . '.' . $imagePath ->getClientOriginalExtension();
-            // $imagePath->move($imageName);
+            // $imagePath->move('img/',$imageName);
             Storage::disk('public')->put('image/'.$imageName, File::get($imagePath));
            
             $request->img=$imageName;
-              
+            // dd($request->img);  
          }
         
         Pharmacy::create([
