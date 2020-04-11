@@ -20,9 +20,7 @@ use Illuminate\Validation\ValidationException;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::prefix('/modelName')->middleware(['auth',])->group(function(){
-        // ALLRoutesForThisModel
-// });
+
 
 //user routes and authentication
 Route::get('/users', 'API\UserController@index');
@@ -44,10 +42,6 @@ Route::get("email/resend", "API\VerificationController@resend")->name("verificat
 
 //address routes
 Route::get('/address', 'API\AddressController@index');
-// Route::get('address/{address}', 'API\AddressController@show');//->middleware('auth:sanctum');
-// Route::post('/address', 'API\AddressController@store');
-// Route::put('/address/{address}','API\AddressController@update');//->middleware('auth:sanctum');
-// Route::delete('address/{address}', 'API\AddressController@destroy');
 Route::prefix('/address')->middleware(['auth:sanctum',])->group(function(){
     
     Route::get('/{address}', 'API\AddressController@show');

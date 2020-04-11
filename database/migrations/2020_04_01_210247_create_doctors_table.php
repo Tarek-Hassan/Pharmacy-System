@@ -22,6 +22,7 @@ class CreateDoctorsTable extends Migration
             $table->string('email')->unique();
             $table->unsignedInteger('pharmacy_id');
             $table->timestamps();
+
         });
     }
 

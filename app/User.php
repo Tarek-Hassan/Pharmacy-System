@@ -11,7 +11,7 @@ use App\Notifications\VerifyEmail;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
-
+ 
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'birth_date',
         'mobile',
         'profile_pic',
-        'mobile',
         'is_admin',
         'api_token'
     ];

@@ -19,8 +19,21 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            if($guard === 'doctor') {
+                return redirect('/home');    
+            }
+            // return redirect(RouteServiceProvider::HOME);
         }
+        // if ($guard == "doctor" && Auth::guard($guard)->check()) {
+        //     return redirect('');  
+        // }
+        // if ($guard == "pharmacy" && Auth::guard($guard)->check()) {
+        //     return redirect('');  
+        // }
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
+
 
         return $next($request);
     }
