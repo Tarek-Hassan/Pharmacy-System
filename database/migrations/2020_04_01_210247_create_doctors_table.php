@@ -20,6 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->string('img');
             $table->string('password');
             $table->string('email')->unique();
+
             $table->unsignedInteger('pharmacy_id');
             $table->timestamps();
 

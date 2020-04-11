@@ -20,7 +20,7 @@ class AddColsEmailPasswordPasswordConfirmationGenderBirthdateMobile extends Migr
             $table->string('password_confirmation')->nullable();
             $table->string('gender')->nullable();
             $table->date('birth_date')->nullable();
-            $table->unsignedInteger('mobile')->nullable();
+            $table->STRING('mobile')->nullable();
             
         });
     }
