@@ -20,7 +20,6 @@ class CreatePharmaciesTable extends Migration
             $table->unsignedInteger('national_id');
             $table->string('pharmacy_name',100);
             $table->string('img');
-            $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('priority');

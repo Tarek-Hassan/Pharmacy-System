@@ -29,7 +29,9 @@ class UserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'profile_pic'=>['required'],
-            'profile_pic.*'=>[ 'image|mimes:jpeg,jpg']
+            'profile_pic.*'=>[ 'image|mimes:jpeg,jpg'],
+            'gender'=>['required'],
+            'birth_date'=>['required']
         ];
     }
 }

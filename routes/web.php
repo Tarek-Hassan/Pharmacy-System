@@ -108,39 +108,21 @@ Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
         Route::put('/{pharmacy}', 'PharmacyController@update')->name("pharmacies.update");
         Route::delete('/{pharmacy}', 'PharmacyController@destroy')->name("pharmacies.destroy");
 });
-// Route::get('/users', 'UserController@index')->name('users.index');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('', 'HomeController@index')->name('home');
 
-//         })->name('deleteNotification');
-//     });
-
-
-//Notify Route this put in OrderController To NOtifiyPrice
-Route::get('/notify', function () {
-        $user = \App\User::find(7);
-        $orderno=101;
-        $price=2000;
-        $details = [
-                'body'=>"Cost Of OrderNO. : $orderno  is $price $"
-        ];
-        $user->notify(new \App\Notifications\PriceNotification($details));
-    });
     
                         
 // =================================================================================================
-Route::prefix('')->middleware(['auth:doctor',])->group(function(){
-Route::GET('',function(){return view('admin.index');})->name('doctor.index');
-Route::GET('/home',function(){return view('admin.index');})->name('doctor.index');
+// Route::prefix('')->middleware(['auth:doctor',])->group(function(){
+Route::GET('/home',function(){return view('admin.index');})->name('doctor.index')->middleware('auth:doctor');
 Route::GET('doctor','doctor\LoginController@showLoginForm')->name('doctor.login');
 Route::POST('doctor','doctor\LoginController@login');
 Route::POST('doctor-password/email','doctor\ForgotPasswordController@sendResetLinkEmail')->name('doctor.password.email');
 Route::GET('doctor-password/reset','doctor\ForgotPasswordController@showLinkRequestForm')->name('doctor.password.request');
 Route::POST('doctor-password/reset','doctor\ResetPasswordController@reset');
 Route::GET('doctor-password/reset/{token}','doctor\ResetPasswordController@showResetForm')->name('doctor.password.reset');
-});
+// });
 // =================================================================================================
-Route::prefix('')->middleware(['auth:pharmacy',])->group(function(){
+// Route::prefix('')->middleware(['auth:pharmacy',])->group(function(){
 Route::GET('',function(){return view('admin.index');})->name('pharmacy.index')->middleware('auth:pharmacy');
 Route::GET('pharmacy','pharmacy\LoginController@showLoginForm')->name('pharmacy.login');
 Route::POST('pharmacy','pharmacy\LoginController@login');
@@ -148,4 +130,4 @@ Route::POST('pharmacy-password/email','pharmacy\ForgotPasswordController@sendRes
 Route::GET('pharmacy-password/reset','pharmacy\ForgotPasswordController@showLinkRequestForm')->name('pharmacy.password.request');
 Route::POST('pharmacy-password/reset','pharmacy\ResetPasswordController@reset');
 Route::GET('pharmacy-password/reset/{token}','pharmacy\ResetPasswordController@showResetForm')->name('pharmacy.password.reset');
-});
+// });
