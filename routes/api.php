@@ -51,6 +51,8 @@ Route::prefix('/address')->middleware(['auth:sanctum',])->group(function(){
 });
 
 //prescription/order
+Route::get('/orders', 'API\PrescriptionController@index');
+
 Route::post('/orders','API\PrescriptionController@store');
 Route::post('/orders/{id}','API\PrescriptionController@update');
 

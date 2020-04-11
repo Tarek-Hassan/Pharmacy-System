@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 class PrescriptionController extends Controller
 {
     //
+    public function index(){
+        return Prescription::all();
+    }
 
     public function store(Request $request){
         //validate img
@@ -56,36 +59,45 @@ class PrescriptionController extends Controller
 
 
     public function update(Request $request, $id){
-        // dd($request->all());
+        
         $address=Prescription::find($id);
-        dd($address);
+       
        
         $order=Order::find($address->delivery_address_id);
-       
-        dd($order->status);
+
         
         if($order->status != "new"){
             return "sorry you cant update it now";
         }
-        
-        $image=$request->file('img');
-        // dd($image);
-        if($image !=''){
+        if($request->hasfile('img')){
             $this->validate($request,[
                 'img' =>'required',
                 'img.*'=> 'image|mimes:jpeg,jpg'
             ]);
-            $extention=$image->getClientOriginalExtension();
-            $image_name=time().'.'.$extention;
-            $image->move('presc_updates/',$image_name);
-            $img[]=$image_name;
+
+            foreach($request->file('img') as $image){
+                
+                $extention=$image->getClientOriginalExtension();
+                $filename=time().'.'.$extention;
+                $image->move('prescription/',$filename);
+                $data[]=$filename;//store each img in the array
+        
+            }
+      
+                $request->img=$data;
+                $data=array(
+                    'img'=>$request->img,
+                    'is_insured'=>$request->is_insured
+                );
+                $presc= Prescription::whereId($id)->update($data);
+                return response()->json([
+                    'message'=>'updated successfully'
+                ]);
+        }else{
+            Prescription::find($id)->update($request->all());
+            return response()->json([
+                'message'=>'updated successfully'
+            ]); 
         }
-        $request->img=$img;
-        $data=array(
-            'img'=>$request->img,
-            'is_insured'=>$request->is_insured
-        );
-        Prescription::whereId($id)->update($data);
-        return "success";
     }
 }
