@@ -59,14 +59,12 @@ class PrescriptionController extends Controller
 
 
     public function update(Request $request, $id){
-        // dd($request->all());
-        // dd($id);
+        
         $address=Prescription::find($id);
-        // dd($address);
+       
        
         $order=Order::find($address->delivery_address_id);
-       
-        // dd($order->status);
+
         
         if($order->status != "new"){
             return "sorry you cant update it now";
