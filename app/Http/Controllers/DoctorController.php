@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Pharmacy;
 use App\Http\Requests\DoctorRequest;
-use DataTables;
+// use DataTables;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
+use Cog\Laravel\Ban\Traits\Bannable;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable; 
 
 class DoctorController extends Controller
 {
@@ -22,11 +26,13 @@ class DoctorController extends Controller
            
            if ($request->ajax()) {
                $data = Doctor::latest()->get();
-               return Datatables::of($data)
+               return DataTables::of($data)
                        ->addIndexColumn()
                        ->addColumn('action', function($row){
+                           
                            // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                           $button = '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
+                           $button = '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/ban" class="edit btn btn-secondary btn-sm">ChangeBan</a>';
+                           $button .= '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
                return $button;
                        })
@@ -44,7 +50,8 @@ class DoctorController extends Controller
            ]);
        }
        public function store(DoctorRequest $request ) {
-            $request['password']=Hash::make($request->password);
+            // $request['password']=Hash::make($request->password);
+            $request['password']=$request->password;
             if($request->hasfile('img'))
             {
                 $file = $request->file('img');
@@ -98,4 +105,35 @@ class DoctorController extends Controller
            $doctors=Doctor::find($id)->delete();
            return redirect()->route('doctors.index');
        }
+
+       public function ban($id) {
+        $doctors=Doctor::find($id);
+        if($doctors->isBanned()){
+            $doctors->unban();
+        }
+        else{
+            $doctors->ban();
+        }
+        return redirect()->route('doctors.index');
+    }
+
+    //    public function ban(){
+    //     $doctorId = request()->doctor;
+    //     $doctor =Doctor::find($doctorId);
+    //     dd($doctor);
+    //     if($doctor->isNotBanned()){
+    //     $doctor->ban();
+    //     // Doctor::where('id',$doctorId)->update([
+    //     // 'is_banned'=>true,
+        
+    //     // ]);
+    // }
+    //     else {
+    //     $doctor->unban();
+    //     // Doctor::where('id',$doctorId)->update([
+    //     // 'is_banned'=>false,
+    //     // ]);
+    // }
+    //     return redirect()->route('doctors.index');
+    //     } 
 }

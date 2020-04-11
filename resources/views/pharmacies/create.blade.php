@@ -32,10 +32,10 @@
                     <label for="exampleInputaddress">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputpassword" placeholder="Enter password">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputaddress">Address ID</label>
                     <input type="text" name="address_id" class="form-control" id="exampleInputaddress" placeholder="Enter Address_ID">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="exampleInputaddress">National ID</label>
                     <input type="text" name="national_id" class="form-control" id="exampleInputnational" placeholder="Enter National_ID">
@@ -44,12 +44,20 @@
                     <label for="exampleInputaddress">Priority</label>
                     <input type="text" name="priority" class="form-control" id="exampleInputpriority" placeholder="Enter Priority">
                   </div>
+                  
                   <div class="form-group">
                     <label for="exampleInputaddress">Image</label>
                     <input type="file" name="img" accept = "image/jpeg" class="form-control" id="exampleInputimg" placeholder="Enter image">
                   </div>
                  
-
+                  <div class="form-group">
+                    Area Name
+                    <select class="custom-select" name="area_id" >
+                      @foreach($areas as $area)
+                        <option value="{{$area->id}}">{{$area->name}}</option>
+                      @endforeach
+                    </select>
+                   </div>
 
                   
 

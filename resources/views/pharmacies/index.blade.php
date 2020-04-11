@@ -17,14 +17,15 @@
                   <th>Image</th>
                   <th>Email</th>
                   <th>priority</th>
-                  <th>Address ID</th>
-                          <th>Actions</th>
+                  <th>Area ID</th>
+                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
 </div>
+<!-- attia -->
 <!-- alret form to confirm delete  -->
 <div class="modal model-danger fade" id="delete" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -96,8 +97,8 @@
                 },
            
                 {
-                    data: 'address_id',
-                    name: 'address_id'
+                    data: 'area_id',
+                    name: 'area_id'
                 },
                  {
                     data: 'action',

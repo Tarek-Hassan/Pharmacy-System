@@ -3,9 +3,27 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use CogBanContractsHasBans as HasBansContract;
+use CogBanTraitsHasBans;
+use IlluminateNotificationsNotifiable;
+use IlluminateFoundationAuthUser as Authenticatable;
+use Cog\Laravel\Ban\Traits\Bannable;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\DoctorRequest;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Laravel\Sanctum\HasApiTokens;
 
-class Doctor extends Model
+
+
+
+
+// class User extends Authenticatable implements MustVerifyEmail, BannableContract
+
+
+
+class Doctor extends Model implements BannableContract
 {
+    use Bannable;
     //
     protected $fillable = [
         'national_id',
@@ -18,12 +36,18 @@ class Doctor extends Model
 
 
     protected $hidden = [
-        'password',
+        'password','remember_token',
     ];
     
     public function pharmacy()
     {
         return $this->belongsTo('App\Pharmacy');
     }
-    
+
+    public function setPasswordAttribute($password)
+{
+$this->attributes['password'] = bcrypt($password);
+}
+
+ 
 }

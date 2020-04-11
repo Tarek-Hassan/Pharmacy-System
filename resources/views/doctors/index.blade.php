@@ -17,11 +17,13 @@
                 <!-- <th>Password</th> -->
                 <th>National Id</th>
                 <th>Pharmacy_Id</th>
+                <th>banned_at</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
+        
     </table>
 </div>
 <!-- alret form to confirm delete  -->
@@ -52,7 +54,7 @@
                 </div>
             </form>
             <!--  -->
-
+     
 
         </div>
     </div>
@@ -100,6 +102,10 @@
                 {
                     data: 'pharmacy_id',
                     name: 'pharmacy_id'
+                },
+                {
+                    data: 'banned_at',
+                    name: 'banned_at'
                 },
                 {
                     data: 'action',

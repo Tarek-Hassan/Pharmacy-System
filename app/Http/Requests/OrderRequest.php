@@ -24,7 +24,24 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'delivery_address' => 'required|min:3',
+            'quantity' => 'required',
+            
+    ];
+    }
+    public function messages()
+    {
+        return [
+            'delivery_address.min'=>'doctor_name SHOULD BE MORE THAN 3 CHAR',
+            'delivery_address.required'=>'AREA_NAME IS REQUIRED (NOT EMPTY)',
+
+            
+            'quantity.required'=>'password IS REQUIRED (NOT EMPTY)',
+
+          
+    
+
+    
         ];
     }
 }

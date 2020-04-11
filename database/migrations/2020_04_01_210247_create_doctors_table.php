@@ -21,6 +21,7 @@ class CreateDoctorsTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->unsignedInteger('pharmacy_id');
+            $table->timestamp('banned_at')->nullable();
             $table->timestamps();
         });
     }

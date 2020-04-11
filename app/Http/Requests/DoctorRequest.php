@@ -24,7 +24,31 @@ class DoctorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'doctor_name' => 'required|min:3',
+            'email' => 'required',
+            'password' => 'required|min:3',
+            'national_id' => 'required|min:3',
+    ];
+    }
+    public function messages()
+    {
+        return [
+            'doctor_name.min'=>'doctor_name SHOULD BE MORE THAN 3 CHAR',
+            'doctor_name.required'=>'AREA_NAME IS REQUIRED (NOT EMPTY)',
+            
+
+            
+            'email.required'=>'email IS REQUIRED (NOT EMPTY)',
+            'email.unique'=>'email SHOULD BE UNIQUE',
+
+            'password.min'=>'password SHOULD BE MORE THAN 3 CHAR',
+            'password.required'=>'password IS REQUIRED (NOT EMPTY)',
+
+            'national_id.min'=>'national_id SHOULD BE MORE THAN 3 CHAR',
+            'national_id.required'=>'national_id IS REQUIRED (NOT EMPTY)',
+    
+
+    
         ];
     }
 }

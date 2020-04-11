@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables ; 
 // use Illuminate\Http\Requests\PharmacyResquest;
 use App\Pharmacy;
+use App\Area;
 
 
 
@@ -37,7 +38,10 @@ class PharmacyController extends Controller
     }
 
     function create () {
-        return view('pharmacies.create');
+        $areas=Area::all();
+        return view('pharmacies.create',[
+            'areas' => $areas,
+        ]);
         }   
             
     function store () {
@@ -57,9 +61,10 @@ class PharmacyController extends Controller
             'password' => Hash::make($request->password),
             'email' =>  $request->email,
             'priority'=>  $request->priority,
-            'address_id'=>$request->address_id,
+            // 'address_id'=>$request->address_id,
             'national_id'=>$request->national_id,
             'img'=> $request->img,
+            'area_id'=>$request->area_id
             // Storage::disk('local')->put('file.txt', 'Contents')
            
             

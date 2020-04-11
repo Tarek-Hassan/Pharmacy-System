@@ -11,4 +11,10 @@ class Area extends Model
         'name','address'
     ];
 
+
+    public function pharmacies()
+    {
+        return $this->hasMany('App\Pharmacy');
+    }
+
 }

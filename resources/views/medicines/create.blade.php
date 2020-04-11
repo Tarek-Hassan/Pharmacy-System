@@ -23,6 +23,16 @@
                     <label for="exampleInputarea">Medicine Name</label>
                     <input type="text" name="medicine_name" class="form-control" id="exampleInputarea" placeholder="Enter MedicineName">
                   </div>
+
+                  <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label>Multiple</label>
+                  @foreach($medicines as $medicine)
+                  <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                    <option>{{$medicine->medicine_name}}</option>
+                  </select>
+                </div>
+                  @endforeach -->
                   <div class="form-group">
                     <label for="exampleInputarea">Type</label>
                     <input type="text" name="type" class="form-control" id="exampleInputarea" placeholder="Enter Type">

@@ -14,13 +14,15 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id('address_id')->unique();
+            $table->id();
             $table->string('street_name');
             $table->string('building_number');
             $table->string('floor_number');
             $table->string('flat_number');
-            $table->string('is_main'); //true or false
-            $table->string('user_id');
+            $table->unsignedInteger('is_main')->default(0); //true or false
+            $table->unsignedInteger('user_id');
+            
+
 
             $table->timestamps();
         });

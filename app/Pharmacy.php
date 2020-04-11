@@ -14,12 +14,17 @@ class Pharmacy extends Model
         'email',
         'password',   
         'priority',
-        'address_id',  
+        'area_id',  
     ];
     
     
     public function address()
     {
         return $this->belongsTo('App\Address');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo('App\Area');
     }
 }

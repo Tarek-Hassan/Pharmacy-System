@@ -25,7 +25,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputarea">Image</label>
-                    <input type="file"  name="img" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
+                    <input type="file" accept="image/jpeg" name="img" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Email</label>
@@ -33,7 +33,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Password</label>
-                    <input type="text" name="password" class="form-control" id="exampleInputaddress" placeholder="Enter Password">
+                    <input type="password" name="password" class="form-control" id="exampleInputaddress" placeholder="Enter Password">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">National_id</label>

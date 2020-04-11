@@ -15,6 +15,8 @@ class CreatePharmaciesTable extends Migration
     {
         Schema::create('pharmacies', function (Blueprint $table) {
 
+            
+            //img not added
             $table->id();
             $table->unsignedInteger('national_id');
             $table->string('pharmacy_name',100);
@@ -22,7 +24,7 @@ class CreatePharmaciesTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->string('priority');
-            $table->unsignedInteger('address_id');
+            $table->unsignedInteger('area_id');
             $table->timestamps();
         });
     }

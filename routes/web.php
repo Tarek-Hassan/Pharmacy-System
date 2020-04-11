@@ -42,7 +42,6 @@ Route::prefix('/areas')->middleware(['auth',])->group(function(){
         Route::put('/{area}', 'AreaController@update')->name("areas.update");
         Route::delete('/{area}', 'AreaController@destroy')->name("areas.destroy");
 });
-
 Route::prefix('/medicines')->middleware(['auth',])->group(function(){
         Route::get('', 'MedicineController@index')->name('medicines.index');
         Route::get('/create', 'MedicineController@create')->name("medicines.create");
@@ -52,7 +51,7 @@ Route::prefix('/medicines')->middleware(['auth',])->group(function(){
         Route::put('/{medicine}', 'MedicineController@update')->name("medicines.update");
         Route::delete('/{medicine}', 'MedicineController@destroy')->name("medicines.destroy");
 });
-Route::prefix('/orders')->middleware(['auth',])->group(function(){
+Route::prefix('/orders')->middleware(['auth','is-ban'])->group(function(){
         Route::get('', 'OrderController@index')->name('orders.index');
         Route::get('/create', 'OrderController@create')->name("orders.create");
         Route::post('', 'OrderController@store')->name("orders.store");
@@ -75,10 +74,12 @@ Route::prefix('/doctors')->middleware(['auth',])->group(function(){
         Route::get('/create', 'DoctorController@create')->name("doctors.create");
         Route::post('', 'DoctorController@store')->name("doctors.store");
         Route::get('/{doctor}', 'DoctorController@show')->name("doctors.show");
+        Route::get('/{doctor}/ban', 'DoctorController@ban')->name("doctors.ban");
         Route::get('/{doctor}/edit', 'DoctorController@edit')->name("doctors.edit");
         Route::put('/{doctor}', 'DoctorController@update')->name("doctors.update");
         Route::delete('/{doctor}', 'DoctorController@destroy')->name("doctors.destroy");
-});
+        
+});  
 Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
         Route::get('', 'PharmacyController@index')->name('pharmacies.index');
         Route::get('/create', 'PharmacyController@create')->name("pharmacies.create");
