@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title','User')
 @section('content')
-<div class="container">
+<div class="container my-3">
     <h1>All Users</h1>
     <a href="{{url('users/create')}}" class="edit btn btn-primary btn-sm">AddUser</a>
     <br>

@@ -3,7 +3,7 @@
 @section('section_title','Pharmacy')
 @section('content')
 
-<div class="container">
+<div class="container my-3">
     <a href="{{route('pharmacies.create')}}" class="edit btn btn-primary btn-sm">Add Pharmacy</a>
     <br>
     <br>

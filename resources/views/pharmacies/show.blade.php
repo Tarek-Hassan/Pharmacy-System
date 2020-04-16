@@ -3,7 +3,7 @@
 @section('section_title','Pharmacies')
 @section('content')
 
-<div class="row">
+<div class="row my-3">
     <div class="card bg-light col-md-4 m-5" style="width: 18rem;">
         <h3 class="card-header">
         Pharmacy Info

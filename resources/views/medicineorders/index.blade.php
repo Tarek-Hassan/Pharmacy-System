@@ -2,7 +2,7 @@
 @section('title','MedicineOrder')
 @section('section_title','MedicineOrder')
 @section('content')
-<div class="container">
+<div class="container my-3">
     <a href="{{url('medicineorders/create')}}" class="edit btn btn-primary btn-sm">Add MedicineOrder</a>
     <br>
     <br>

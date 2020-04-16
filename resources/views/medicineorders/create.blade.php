@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-12">
+          <div class="col-md-12 my-3">
               <!-- jquery validation -->
               <div class="card card-primary">
               @include('admin.error')

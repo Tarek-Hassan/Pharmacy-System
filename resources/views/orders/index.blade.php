@@ -2,7 +2,7 @@
 @section('title','Order')
 @section('section_title','Order')
 @section('content')
-<div class="container">
+<div class="container my-3">
     <a href="{{url('orders/create')}}" class="edit btn btn-primary btn-sm">Add Order</a>
     <br>
     <br>
