@@ -26,12 +26,9 @@ class MedicineOrderController extends Controller
                $data = MedicineOrder::latest()->get();
                return Datatables::of($data)
                        ->addIndexColumn()
-                    //    ->addColumn('medicine_id', function($row){
-                    //     return $row->medicine;
-                    //    })
+
                        ->addColumn('action', function($row){
 
-                           // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                            $button = '&nbsp;&nbsp;&nbsp;<a href="medicineorders/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
                return $button;
@@ -53,7 +50,7 @@ class MedicineOrderController extends Controller
            
            
            
-        //    dd($doctors);
+    
            return view('medicineorders.create',[
             'medicines' => $medicines,
             'orders' => $orders,
@@ -64,9 +61,7 @@ class MedicineOrderController extends Controller
            ]);
        }
        public function store(Request $request) {
-            // dd($request->all());
-        //    $orders=Order::create($request->all());
-        
+          
         MedicineOrder::create([
                 'medicine_id' => $request->medicine_id,
                 'order_id' => $request->order_id,

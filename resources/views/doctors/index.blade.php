@@ -14,7 +14,6 @@
                 <th>Doctor_Name</th>
                 <th>Image</th>
                 <th>Email</th>
-                <!-- <th>Password</th> -->
                 <th>National Id</th>
                 <th>Pharmacy_Id</th>
                 <th>banned_at</th>
@@ -76,25 +75,19 @@
                     name: 'id'
                 },
                 {
-                    data: 'doctor_name',
-                    name: 'doctor_name'
+                    data: 'name',
+                    name: 'name'
                 },
 
                   {
-                    data: 'img',
-                    name: 'img',
-                    render: function(url){
-                        return '<img src="{{url("uploads/images/")}}'+'/'+''+url+'" height="50" width="50">';
-                    }
+                    data: 'docImage',
+                    name: 'docImage',
+                    render:function(data){ return "<img width='50px' height='50px' src='/storage/"+ data + "' />";}
                 },
                 {
                     data: 'email',
                     name: 'email'
                 },
-                // {
-                //     data: 'password',
-                //     name: 'password'
-                // },
                 {
                     data: 'national_id',
                     name: 'national_id'
@@ -103,10 +96,10 @@
                     data: 'pharmacy_id',
                     name: 'pharmacy_id'
                 },
-                {
-                    data: 'banned_at',
-                    name: 'banned_at'
-                },
+                // {
+                //     data: 'banned_at',
+                //     name: 'banned_at'
+                // },
                 {
                     data: 'action',
                     name: 'action',
@@ -117,7 +110,6 @@
         });
         $(document).on("click", ".del", function () {
             var myBookId = $(this).data('id');
-            console.log(myBookId);
             var deleteForm = document.getElementById("formdelete") // get form 
             deleteForm.action = '/doctors/' + myBookId; // assign action 
 

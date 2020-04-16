@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables ; 
-// use Illuminate\Http\Requests\PharmacyResquest;
 use App\Pharmacy;
 use App\Area;
 
@@ -25,7 +24,6 @@ class PharmacyController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                         $button = '&nbsp;&nbsp;&nbsp;<a href="pharmacies/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm m-1">Edit</a>';
                         $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm m-1 "  data-toggle="modal"data-target="#delete">Delete</a>';
             return $button;
@@ -43,36 +41,15 @@ class PharmacyController extends Controller
             'areas' => $areas,
         ]);
         }   
-            
-    function store () {
-        $request = request();
-        if ($request->hasFile('img')) {
-            $imagePath = $request->file('img');
-            $imageName = time() . '.' . $imagePath ->getClientOriginalExtension();
-            // $imagePath->move('img/',$imageName);
-            Storage::disk('public')->put('image/'.$imageName, File::get($imagePath));
-           
-            $request->img=$imageName;
-            // dd($request->img);  
-         }
-        
-        Pharmacy::create([
-            'pharmacy_name' => $request->pharmacy_name,
-            'password' => Hash::make($request->password),
-            'email' =>  $request->email,
-            'priority'=>  $request->priority,
-            // 'address_id'=>$request->address_id,
-            'national_id'=>$request->national_id,
-            'img'=> $request->img,
-            'area_id'=>$request->area_id
-            // Storage::disk('local')->put('file.txt', 'Contents')
-           
-            
-        ]);
-     
-        session()->flash('success','Pharmacy created successfully');
+             
+    public function store(Request $request) {
+        $request['img']=Storage::disk('public')->put('images',$request->profile);
+        $request['password']=Hash::make($request->password);
+        $pharmacy=Pharmacy::create($request->all());
         return redirect()->route('pharmacies.index');
-        ;}         
+
+      
+    }     
 
 public function show()
 {
@@ -96,22 +73,27 @@ return view('pharmacies.edit',[
  }
 
 
-public function update()
+public function update(Request $request, $id)
 {
-  $request=request();
-  $pharmacy_id=$request->pharmacy;
- $pharmacy= Pharmacy::find($pharmacy_id); 
+    if($request->profile){
+        Storage::disk('public')->delete($request->oldimg);
+        $request['img']=Storage::disk('public')->put('images',$request->profile);
+    }else{
+        $request['img']=$request->oldimg;
+    }
+ $pharmacy= Pharmacy::findOrFail($id); 
   $pharmacy->update($request->all());
+  $pharmacy->fresh();
    return redirect('/pharmacies');
 }
 
-public function destroy()
+public function destroy($id)
    { 
-    $request=request();
-    $pharmacy_id=$request->pharmacy;
-    $pharmacy= Pharmacy::find($pharmacy_id); 
+   
+    $pharmacy= Pharmacy::find($id); 
+    Storage::disk('public')->delete($pharmacy->img);
     $pharmacy->delete();
-    return redirect('/pharmacies');
+    return redirect()->back();
    
     }
 

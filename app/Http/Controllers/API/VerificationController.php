@@ -29,7 +29,7 @@ class VerificationController extends Controller
         $user->email_verified_at = $date; // to enable the “email_verified_at field of that user be a current time stamp by mimicing the must verify email feature
         $user->save();
         $when = carbon::now()->addSeconds(5);
-        User::find(7)->notify((new GreetingNotification)->delay($when));
+        User::find($userID)->notify((new GreetingNotification)->delay($when));
         return response()->json("Email verified!");
     }
 

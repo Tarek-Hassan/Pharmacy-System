@@ -36,7 +36,7 @@ class CreatAccount extends Command {
      * @return mixed
      */
     public function handle() {
-        //
+        
         $details=$this->getInfo();
         $validDetails=$this->validator($details);
 
@@ -75,7 +75,6 @@ class CreatAccount extends Command {
         $details['name']=$this->ask('Name');
         $details['email']=$this->ask('Email');
         $details['password']=$this->secret('Password');
-        // $details['confirm_password'] = $this->secret('Confirm password');
         return $details;
 
     }

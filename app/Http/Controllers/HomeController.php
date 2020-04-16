@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-// use App\Jobs\SendEmail;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

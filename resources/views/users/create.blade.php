@@ -25,7 +25,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputarea">profile_Image</label>
-                    <input type="file" accept="image/jpeg" name="profile_pic" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
+                    <input type="file" name="profile" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Email</label>
@@ -40,9 +40,9 @@
                     <input type="text" name="national_id" class="form-control" id="exampleInputaddress" placeholder="National_id">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputaddress">Gender</label>
-                    <input type="radio" name="gender" value="male" class="form-control" >Male<br/>
-                    <input type="radio" name="gender" value="female" class="form-control">Female<br/>
+                    <label for="exampleInputaddress">Gender</label><br/>
+                    <input type="radio" name="gender" value="male" >Male<br/>
+                    <input type="radio" name="gender" value="female">Female<br/>
                   </div> 
                   <div class="form-group">
                     <label for="exampleInputaddress">BirthDate</label>
@@ -50,7 +50,7 @@
                   </div> 
                   <div class="form-group">
                     <label for="exampleInputaddress">MObile</label>
-                    <input type="text" name="mobile" class="form-control" id="exampleInputaddress" placeholder="National_id">
+                    <input type="text" name="mobile" class="form-control" id="exampleInputaddress" placeholder="mobile">
                   </div> 
                 </div>
                 <!-- /.card-body -->

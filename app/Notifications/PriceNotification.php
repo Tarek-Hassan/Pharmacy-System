@@ -41,10 +41,7 @@ private $details;
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)
-        //             ->line('The introduction to the notification.')
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you for using our application!');
+      
     }
 
     /**
@@ -55,8 +52,7 @@ private $details;
      */
     public function toArray($notifiable)
     {
-        // dd($this->details);
-        // return $this->details;
+        
         return [
             
             'data'=> $this->details['body'],

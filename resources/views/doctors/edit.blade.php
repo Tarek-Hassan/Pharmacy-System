@@ -22,11 +22,13 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputarea">Doctor_Name</label>
-                    <input type="text" name="doctor_name" value="{{$doctors->doctor_name}}" class="form-control" id="exampleInputarea" placeholder="Enter Doctor_Name">
+                    <input type="text" name="name" value="{{$doctors->name}}" class="form-control" id="exampleInputarea" placeholder="Enter Doctor_Name">
                   </div>
-                  <div class="form-group">
+<div class="form-group">
                     <label for="exampleInputaddress">Image</label>
-                    <input type="file" name="img" value="{{$doctors->img}}" class="form-control" id="exampleInputaddress" placeholder="Enter Image">
+                    <img   width='50px'  style="float:right;" height='50px'  src="/storage/{{$doctors->docImage}}" >
+                    <input type="hidden" value="{{$doctors->docImage}}" name="oldimg">
+                    <input type="file"  name="profile" class="form-control" id="exampleInputaddress" placeholder="Enter Image">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Email</label>
@@ -34,9 +36,13 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Password</label>
-                    <input type="text" name="Password" value="{{$doctors->Password}}" class="form-control" id="exampleInputaddress" placeholder="Enter Password">
+                    <input type="password" name="password" value="{{$doctors->password}}" class="form-control" id="exampleInputaddress" placeholder="Enter Password">
                   </div>
-                  
+                  <div class="form-group">
+                                <label for="exampleInputaddress">National_id</label>
+                                <input type="text" name="national_id" value="{{$doctors->national_id}}"class="form-control" id="exampleInputaddress"
+                                    placeholder="National_id">
+                            </div>
                   <div class="form-group">
                     Pharmacy Name
                     <select class="custom-select" name="pharmacy_id" >

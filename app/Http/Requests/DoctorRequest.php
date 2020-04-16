@@ -24,7 +24,7 @@ class DoctorRequest extends FormRequest
     public function rules()
     {
         return [
-            'doctor_name' => 'required|min:3',
+            'name' => 'required|min:3',
             'email' => 'required',
             'password' => 'required|min:3',
             'national_id' => 'required|min:3',
@@ -33,8 +33,8 @@ class DoctorRequest extends FormRequest
     public function messages()
     {
         return [
-            'doctor_name.min'=>'doctor_name SHOULD BE MORE THAN 3 CHAR',
-            'doctor_name.required'=>'AREA_NAME IS REQUIRED (NOT EMPTY)',
+            'name.min'=>'doctor_name SHOULD BE MORE THAN 3 CHAR',
+            'name.required'=>'doctor_name IS REQUIRED (NOT EMPTY)',
             
 
             

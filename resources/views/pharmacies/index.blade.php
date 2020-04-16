@@ -85,7 +85,9 @@
                 },
                 {
                     data: 'img',
-                    name: 'img', render:function(url){ return '<img src="{{url("uploads/image/")}}'+'/'+''+url+'" width = "50" height="50" />'; }
+                    name: 'img',
+                    render:function(data){ return "<img width='50px' height='50px' src='/storage/"+ data + "' />";}
+
                 },
                 {
                     data: 'email',
@@ -119,41 +121,4 @@
 
 </script>
 
-<!-- <script type="text/javascript">
-    $(function () {
-
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('pharmacies.index') }}",
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                // {
-                //     data: 'name',
-                //     name: 'name'
-                // },
-                // {
-                //     data: 'address',
-                //     name: 'address'
-                // },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-        $(document).on("click", ".del", function () {
-            var myBookId = $(this).data('id');
-            console.log(myBookId);
-            var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/pharmacies/' + myBookId; // assign action 
-
-        });
-    });
-
-</script> -->
 @endsection 

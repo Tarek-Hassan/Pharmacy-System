@@ -32,7 +32,7 @@ class OrderRequest extends FormRequest
     public function messages()
     {
         return [
-            'delivery_address.min'=>'doctor_name SHOULD BE MORE THAN 3 CHAR',
+            'delivery_address.min'=>'delivery_address SHOULD BE MORE THAN 3 CHAR',
             'delivery_address.required'=>'AREA_NAME IS REQUIRED (NOT EMPTY)',
 
             

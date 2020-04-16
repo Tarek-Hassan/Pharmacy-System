@@ -12,18 +12,18 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-            @auth("web")
+                @auth("web")
                 <img src="{{ Auth::user()->profile_pic ? Auth::user()->profile_pic : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
-                    @endauth
-            @auth("doctor")
+                @endauth
+                @auth("doctor")
                 <img src="{{ Auth::guard('doctor')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
-                    @endauth
-            @auth("pharmacy")
+                @endauth
+                @auth("pharmacy")
                 <img src="{{ Auth::guard('pharmacy')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
-                    @endauth
+                @endauth
             </div>
             <div class="info">
 
@@ -66,64 +66,42 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item ">
+                    <a href="{{url('doctors')}}" class="nav-link">
                         <i class="nav-icon fas fa-user-md"></i>
                         <p>
                             Doctors
-                            <i class="right fas fa-angle-left"></i>
+
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{url('medicines')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Medicines</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('orders')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Orders</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('medicineorders')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>MedicineOrder</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('doctors')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Profile</p>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('orders')}}" class="nav-link">
+
+                        <i class="nav-icon fas fa-receipt"></i>
+                        <p>
+                            Order
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('medicines')}}" class="nav-link">
+                        <i class="nav-icon fas fa-capsules"></i>
+                        <p>
+                            Medicines,
+                        </p>
+                    </a>
                 </li>
                 @auth
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item ">
+                    <a href="{{url('users')}}" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                             Users
-                            <i class="right fas fa-angle-left"></i>
+
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{url('users')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>users</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Flot</p>
-                            </a>
-                        </li>
-                    </ul>
+
                 </li>
                 <li class="nav-item">
                     <a href="{{url('areas')}}" class="nav-link">
@@ -142,16 +120,9 @@
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-capsules"></i>
-                        <p>
-                            Medicines,
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-donate"></i>
                         <p>
                             Revenue

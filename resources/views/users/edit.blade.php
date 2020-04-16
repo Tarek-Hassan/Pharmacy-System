@@ -26,7 +26,9 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">profile_Image</label>
-                    <input type="file" accept="image/jpeg" name="profile_pic" value="{{$users->profile_pic}}" class="form-control" id="exampleInputaddress" placeholder="Enter Image">
+                    <img   width='50px'  style="float:right;" height='50px'  src="/storage/{{$users->profile_pic}}" >
+                    <input type="hidden" value="{{$users->profile_pic}}" name="oldimg">
+                    <input type="file"  name="profile" class="form-control" id="exampleInputaddress" placeholder="Enter Image">
                   </div>
                   @if(Auth::user()->is_admin==1)
                   <div class="form-group">

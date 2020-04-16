@@ -57,21 +57,20 @@ class OrderController extends Controller
            $request['order_id']=$orders->id;
             
             $medicine = Medicine::find($request->medicine_id);
-        
+        $total=$medicine->price*$request->quantity;
            $ord=MedicineOrder::create([
             'medicine_id' => $request->medicine_id,
             'order_id' => $request->order_id,
             'user_id' => $request->user_id,
             'pharmacy_id' => $request->pharmacy_id,
             'quantity' => $request->quantity,
-            'total_price' => $medicine->price*$request->quantity,
+            'total_price' => $total,
            ]);
            
-           $ord=MedicineOrder::create($request->all());
            //Notify Route this put in OrderController To NOtifiyPrice
            $user = \App\User::find($request->user_id);
            $orderno=$orders->id;
-           $price=$request->total_price;
+           $price=$total;
            $details = [
                    'body'=>"Cost Of OrderNO. : $orderno  is $price $"
            ];

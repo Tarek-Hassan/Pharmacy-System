@@ -31,7 +31,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">Password</label>
-                    <input type="password" name="password" value="" class="form-control" id="exampleInputpassword" placeholder="Enter Password">
+                    <input type="password" name="password" value="{{$pharmacy->password}}" class="form-control" id="exampleInputpassword" placeholder="Enter Password">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputaddress">National ID</label>
@@ -41,10 +41,14 @@
                     <label for="exampleInputaddress">Priority</label>
                     <input type="text" name="priority" value="{{$pharmacy->priority}}" class="form-control" id="exampleInputpriority" placeholder="Enter Priority">
                   </div>
+                  <!--  -->
                   <div class="form-group">
-                    <label for="exampleInputaddress">Image</label>
-                    <input type="file" name="img" value="{{$pharmacy->img}}" class="form-control" id="exampleInputimage" placeholder="Enter Image">
+                    <label for="exampleInputaddress">_Image</label>
+                    <img   width='50px'  style="float:right;" height='50px'  src="/storage/{{$pharmacy->img}}" >
+                    <input type="hidden" value="{{$pharmacy->img}}" name="oldimg">
+                    <input type="file"  name="profile" class="form-control" id="exampleInputaddress" placeholder="Enter Image">
                   </div>
+                  <!--  -->
                  
                 </div>
                 <!-- /.card-body -->

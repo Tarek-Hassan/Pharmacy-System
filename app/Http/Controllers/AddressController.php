@@ -24,7 +24,6 @@ class AddressController extends Controller
                     ->addColumn('username', function($row){ return $row->user->name;})
                     ->addColumn('areaname', function($row){ return $row->area->name;})
                     ->addColumn('action', function($row){
-                        // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                         $button = '&nbsp;&nbsp;&nbsp;<a href="address/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
                         $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
             return $button;

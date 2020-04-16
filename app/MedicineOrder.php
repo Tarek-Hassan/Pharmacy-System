@@ -8,7 +8,7 @@ class MedicineOrder extends Model
 {
 
     protected $table = 'medicine_orders';
-    //
+    
     protected $fillable = [
         'medicine_id',
         'order_id',

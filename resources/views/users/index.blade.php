@@ -6,14 +6,17 @@
     <a href="{{url('users/create')}}" class="edit btn btn-primary btn-sm">AddUser</a>
     <br>
     <br>
- 
+
     <table class="table table-bordered data-table">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Profile</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Action</th>
+                <th></th>
+                
             </tr>
         </thead>
         <tbody>
@@ -68,6 +71,11 @@
                     data: 'id',
                     name: 'id'
                 },
+                {
+                    data: 'profile_pic',
+                    name: 'profile_pic',
+                    render:function(data){ return "<img width='50px' height='50px' src='/storage/"+ data + "' />";}
+                },    
                 {
                     data: 'name',
                     name: 'name'

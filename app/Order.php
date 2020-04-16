@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
+    
     protected $fillable = [
         'delivery_address',
         'is_insured',
@@ -29,7 +29,6 @@ class Order extends Model
 
     public function medicine()
     {
-        // return $this->belongsToMany('App\MedicineOrder','medicine_orders','order_id','medicine_id',);
         return $this->belongsToMany('App\MedicineOrder');
     }
 }

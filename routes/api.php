@@ -28,7 +28,7 @@ Route::post('/users', 'API\UserController@store');
 Route::delete('users/{user}', 'API\UserController@destroy');
 Route::prefix('/users')->middleware(['auth:sanctum',])->group(function(){
     Route::get('/{user}', 'API\UserController@show');
-    Route::put('/{user}','API\UserController@update');//not working in postman with put method but post works
+    Route::post('/{user}','API\UserController@update');//not working in postman with put method but post works
 });
 
 //login endpoint

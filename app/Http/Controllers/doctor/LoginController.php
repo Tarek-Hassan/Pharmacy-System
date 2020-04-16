@@ -42,7 +42,8 @@ class LoginController extends Controller
 public function login(Request $request)
 {
     $this->validator($request);
-    
+  
+    // dd(Auth::guard('doctor')->attempt($request->only('email','password'),$request->filled('remember')));
     if(Auth::guard('doctor')->attempt($request->only('email','password'),$request->filled('remember'))){
         //Authentication passed...
     return redirect()->route('doctor.index');

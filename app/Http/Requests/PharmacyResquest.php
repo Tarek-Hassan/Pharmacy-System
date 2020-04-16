@@ -13,7 +13,7 @@ class PharmacyResquest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,11 +24,14 @@ class PharmacyResquest extends FormRequest
     public function rules()
     {
         return [
-            'pharmacy_name' => 'required',
-            'email' => 'required|email:rfc,dns',
+            'pharmacy_name' => 'required|unique:pharmacies',
+            'email' => 'required|unique:pharmacies|email',
             'national_id' => 'required',
             'address_id' => 'required',
             'priority' => 'required',
+            'password'=>'required|min:6|',
+            'img'=>'mimes:jpeg,jpg',
+
         ];
     }
 
@@ -36,8 +39,14 @@ class PharmacyResquest extends FormRequest
     {
         return [
             'pharmacy_name.required' => 'Please enter the pharmacy name ',
-            'email.required' => 'Please enter the email field',
-            'email.email:rfc,dns' => 'Please enter a valid email address',
+            'pharmacy_name.unique' => 'Sorry,This name is already exist!',
+            'email.required' => 'Please Fill out This Field!',
+            'email.unique' => 'Sorry,This Email is already exist!',
+            'email.email' => 'Please enter a valid Email',
+            'password.required' => 'Please Fill out This Field!',
+            'password.min' => 'Your password is too short',
+             'national_id'=>'Please Fill out This Field!',
+             'img'=>'Uploaded file is not a valid image. Only JPG and JPEG  files are allowed'
           
            ]; 
     } 

@@ -17,7 +17,7 @@ class OrderResource extends JsonResource
         return [
             'ordered_at'=>$this->created_at,
             'status'=>$this->status,
-            // 'total_price'=>$this->total_price
+            
         ];
     }
 }

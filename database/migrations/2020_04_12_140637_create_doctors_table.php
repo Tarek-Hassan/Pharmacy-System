@@ -15,15 +15,13 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('national_id');
-            $table->string('doctor_name',100);
-            $table->string('img');
-            $table->string('password');
+            $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
+            $table->unsignedInteger('national_id');
             $table->unsignedInteger('pharmacy_id');
-            $table->timestamp('banned_at')->nullable();
+            $table->string('docImage');
             $table->timestamps();
-
         });
     }
 

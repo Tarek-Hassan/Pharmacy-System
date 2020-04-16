@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Pharmacy;
 use App\Http\Requests\DoctorRequest;
-// use DataTables;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -29,10 +28,7 @@ class DoctorController extends Controller
                return DataTables::of($data)
                        ->addIndexColumn()
                        ->addColumn('action', function($row){
-                           
-                           // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                           $button = '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/ban" class="edit btn btn-secondary btn-sm">ChangeBan</a>';
-                           $button .= '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
+                           $button = '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
                return $button;
                        })
@@ -42,42 +38,24 @@ class DoctorController extends Controller
          
            return view('doctors.index');
        }
-   
        public function create() {
         $pharmacies = Pharmacy::all();
            return view('doctors.create',[
             'pharmacies' => $pharmacies,
            ]);
        }
-       public function store(DoctorRequest $request ) {
-            // $request['password']=Hash::make($request->password);
-            $request['password']=$request->password;
-            if($request->hasfile('img'))
-            {
-                $file = $request->file('img');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                Storage::disk('public')->put('images/'.$filename, File::get($file));
-            }
-            $request->img=$filename;
-            // else{
-            //     $filename = 'doctor.jpeg';
-            // }
-            // $request['img']=Storage::disk('public')->put(public_path('images'),$request['img']);
-            // dd($request['img']);
-         
 
-        //    $doctors=
-           Doctor::create([
-            'national_id'=>$request->national_id,
-            'doctor_name'=>$request->doctor_name,
-            'img'=>$request->img,
-            'password'=>$request->password,
-            'email'=>$request->email,
-            'pharmacy_id'=>$request->pharmacy_id,
-           ]);
+  
+       public function store(Request $request) {
+        $request['docImage']=Storage::disk('public')->put('images',$request->profile);
+        $request['password']=Hash::make($request->password);
+        $doctor=Doctor::create($request->all());
            return redirect()->route('doctors.index');
        }
+   
+ 
+     
+
        public function show($id) {
            $doctors=Doctor::findOrFail($id);
            return view('doctors.show', compact('doctors'));
@@ -91,31 +69,36 @@ class DoctorController extends Controller
        }
    
        public function update(DoctorRequest $request, $id ) {
-        //    if(array_key_exists('img',$model)){
-        //        Storage::disk('public')->delete($model['oldimg']);
-        //        $model['img']=Storage::disk('public')->put($this->path,$model['img']);
-        //        dd($model);
-        //     }
+        if($request->profile){
+            Storage::disk('public')->delete($request->oldimg);
+            $request['docImage']=Storage::disk('public')->put('images',$request->profile);
+        }else{
+            $request['docImage']=$request->oldimg;
+        }
+
            $doctorUpdate = Doctor::findOrFail($id);
            $doctorUpdate->update($request->all());
            $doctorUpdate->fresh();
            return redirect()->route('doctors.index');
        }
+
        public function destroy($id) {
-           $doctors=Doctor::find($id)->delete();
+           $doctors=Doctor::find($id);
+           Storage::disk('public')->delete($doctors->docImage);
+           $doctors->delete();
            return redirect()->route('doctors.index');
        }
 
-       public function ban($id) {
-        $doctors=Doctor::find($id);
-        if($doctors->isBanned()){
-            $doctors->unban();
-        }
-        else{
-            $doctors->ban();
-        }
-        return redirect()->route('doctors.index');
-    }
+    //    public function ban($id) {
+    //     $doctors=Doctor::find($id);
+    //     if($doctors->isBanned()){
+    //         $doctors->unban();
+    //     }
+    //     else{
+    //         $doctors->ban();
+    //     }
+    //     return redirect()->route('doctors.index');
+    // }
 
     //    public function ban(){
     //     $doctorId = request()->doctor;

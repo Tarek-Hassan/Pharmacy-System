@@ -30,7 +30,6 @@ class UserController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-      
         return view('users.index');
     }
 
@@ -40,19 +39,13 @@ class UserController extends Controller
     }
     
     public function store(Request $request) {
+     
+        $request['profile_pic']=Storage::disk('public')->put('images',$request->profile);
         $request['password']=Hash::make($request->password);
-        if($request->hasfile('profile_pic'))
-        {
-            $file = $request->file('profile_pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            Storage::disk('public')->put('images/'.$filename, File::get($file));
-        }
-        $request['profile_pic']=$filename;
         $user=User::create($request->all());
         return redirect()->route('users.index');
-        // return view('users.index');
     }
+
     public function show($id) {
         $users=User::findOrFail($id);
         return view('users.show', compact('users'));
@@ -65,14 +58,22 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+
+        if($request->profile){
+            Storage::disk('public')->delete($request->oldimg);
+            $request['profile_pic']=Storage::disk('public')->put('images',$request->profile);
+        }else{
+            $request['profile_pic']=$request->oldimg;
+        }
         $userUpdate = User::findOrFail($id);
         $userUpdate->update($request->all());
         $userUpdate->fresh();
         return redirect()->route('users.index');
     }
     public function destroy($id) {
-        $users=User::find($id)->delete();
+        $users=User::find($id);
+        Storage::disk('public')->delete($users->profile_pic);
+        $users->delete();
         return redirect()->back();
     }
-
 }

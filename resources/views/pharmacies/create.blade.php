@@ -47,7 +47,7 @@
                   
                   <div class="form-group">
                     <label for="exampleInputaddress">Image</label>
-                    <input type="file" name="img" accept = "image/jpeg" class="form-control" id="exampleInputimg" placeholder="Enter image">
+                    <input type="file" name="profile" class="form-control" id="exampleInputarea" placeholder="Enter Image" >
                   </div>
                  
                   <div class="form-group">

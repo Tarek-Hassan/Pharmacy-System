@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Auth::routes(['register' => false]);
 
 Route::prefix('/users')->middleware(['auth',])->group(function(){
@@ -59,10 +58,7 @@ Route::prefix('/markAsRead')->middleware(['auth',])->group(function(){
 
         })->name('mark');
     });
-// Route::prefix('/deleteNotification')->middleware(['auth',])->group(function(){
-//         Route::get('', function(){
-//                 auth()->user()->notifications()->delete();
-// 	                return redirect()->back();
+
 Route::prefix('/medicines')->middleware(['auth',])->group(function(){
         Route::get('', 'MedicineController@index')->name('medicines.index');
         Route::get('/create', 'MedicineController@create')->name("medicines.create");
@@ -115,7 +111,6 @@ Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
     
                         
 // =================================================================================================
-// Route::prefix('')->middleware(['auth:doctor',])->group(function(){
 Route::GET('/home',function(){return view('admin.index');})->name('doctor.index')->middleware('auth:doctor');
 Route::GET('doctor','doctor\LoginController@showLoginForm')->name('doctor.login');
 Route::POST('doctor','doctor\LoginController@login');
@@ -123,9 +118,8 @@ Route::POST('doctor-password/email','doctor\ForgotPasswordController@sendResetLi
 Route::GET('doctor-password/reset','doctor\ForgotPasswordController@showLinkRequestForm')->name('doctor.password.request');
 Route::POST('doctor-password/reset','doctor\ResetPasswordController@reset');
 Route::GET('doctor-password/reset/{token}','doctor\ResetPasswordController@showResetForm')->name('doctor.password.reset');
-// });
 // =================================================================================================
-// Route::prefix('')->middleware(['auth:pharmacy',])->group(function(){
+
 Route::GET('',function(){return view('admin.index');})->name('pharmacy.index')->middleware('auth:pharmacy');
 Route::GET('pharmacy','pharmacy\LoginController@showLoginForm')->name('pharmacy.login');
 Route::POST('pharmacy','pharmacy\LoginController@login');
@@ -133,4 +127,3 @@ Route::POST('pharmacy-password/email','pharmacy\ForgotPasswordController@sendRes
 Route::GET('pharmacy-password/reset','pharmacy\ForgotPasswordController@showLinkRequestForm')->name('pharmacy.password.request');
 Route::POST('pharmacy-password/reset','pharmacy\ResetPasswordController@reset');
 Route::GET('pharmacy-password/reset/{token}','pharmacy\ResetPasswordController@showResetForm')->name('pharmacy.password.reset');
-// });

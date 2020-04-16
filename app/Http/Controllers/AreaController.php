@@ -20,7 +20,6 @@ class AreaController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        // $button  = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
                         $button = '&nbsp;&nbsp;&nbsp;<a href="areas/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edite</a>';
                         $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
             return $button;

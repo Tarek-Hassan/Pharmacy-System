@@ -10,7 +10,7 @@ class Pharmacy extends Authenticatable
 {
     use Notifiable;
     protected $guard='pharmacy';
-    //
+    
     protected $fillable = [
         'national_id',
         'pharmacy_name',
