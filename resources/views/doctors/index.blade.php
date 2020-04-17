@@ -15,8 +15,8 @@
                 <th>Image</th>
                 <th>Email</th>
                 <th>National Id</th>
-                <th>Pharmacy_Id</th>
-                <th>banned_at</th>
+                <th>Pharmacy_Name</th>
+                <th>Banned</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -96,10 +96,12 @@
                     data: 'pharmacy_id',
                     name: 'pharmacy_id'
                 },
-                // {
-                //     data: 'banned_at',
-                //     name: 'banned_at'
-                // },
+                {
+                    data: 'ban',
+                    name: 'ban',
+                                        orderable: false,
+                    searchable: false
+                },
                 {
                     data: 'action',
                     name: 'action',
@@ -109,9 +111,20 @@
             ]
         });
         $(document).on("click", ".del", function () {
-            var myBookId = $(this).data('id');
+            var id = $(this).data('id');
             var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/doctors/' + myBookId; // assign action 
+            deleteForm.action = '/doctors/' + id; // assign action 
+        });
+        $(document).on("click", ".ban", function () {
+            var id = $(this).data('id');
+            $.ajax({
+                
+  url: "doctors/"+id+"/ban",
+  context: document.body
+}).done(function() {
+    location.reload(true);
+});
+            
 
         });
     });

@@ -86,12 +86,13 @@ Route::prefix('/medicineorders')->middleware(['auth',])->group(function(){
         Route::put('/{medicineorder}', 'MedicineOrderController@update')->name("medicineorders.update");
         Route::delete('/{medicineorder}', 'MedicineOrderController@destroy')->name("medicineorders.destroy");
 });
-Route::prefix('/doctors')->middleware(['auth',])->group(function(){
+// Route::prefix('/doctors')->middleware(['auth','forbid-banned-doctor'])->group(function(){
+Route::prefix('/doctors')->middleware(['auth'])->group(function(){
         Route::get('', 'DoctorController@index')->name('doctors.index');
         Route::get('/create', 'DoctorController@create')->name("doctors.create");
         Route::post('', 'DoctorController@store')->name("doctors.store");
         Route::get('/{doctor}', 'DoctorController@show')->name("doctors.show");
-        Route::get('/{doctor}/ban', 'DoctorController@ban')->name("doctors.ban");
+        Route::get('/{doctor}/ban', 'DoctorController@Banned')->name("doctors.Banned");
         Route::get('/{doctor}/edit', 'DoctorController@edit')->name("doctors.edit");
         Route::put('/{doctor}', 'DoctorController@update')->name("doctors.update");
         Route::delete('/{doctor}', 'DoctorController@destroy')->name("doctors.destroy");

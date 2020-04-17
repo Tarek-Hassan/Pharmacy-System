@@ -53,12 +53,13 @@ public function login(Request $request)
     return $this->loginFailed();
 
 }
+
 public function logout()
 {
     Auth::guard('pharmacy')->logout();
     return redirect()
-        ->route('pharmacy.login')
-        ->with('status','pharmacy has been logged out!');
+    ->route('pharmacy.login');
+        
 }
 private function loginFailed(){
     return redirect()

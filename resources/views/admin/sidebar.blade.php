@@ -13,15 +13,15 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 @auth("web")
-                <img src="{{ Auth::user()->profile_pic ? Auth::user()->profile_pic : 'control/dist/img/user2-160x160.jpg'}}"
+                <img src="/storage/{{ Auth::user()->profile_pic ? Auth::user()->profile_pic : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
                 @endauth
                 @auth("doctor")
-                <img src="{{ Auth::guard('doctor')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
+                <img src="/storage/{{ Auth::guard('doctor')->user()->docImage ? Auth::guard('doctor')->user()->docImage : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
                 @endauth
                 @auth("pharmacy")
-                <img src="{{ Auth::guard('pharmacy')->user()->img ? Auth::guard('doctor')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
+                <img src="/storage/{{ Auth::guard('pharmacy')->user()->img ? Auth::guard('pharmacy')->user()->img : 'control/dist/img/user2-160x160.jpg'}}"
                     class="img-circle elevation-2" alt="User Image">
                 @endauth
             </div>
@@ -34,7 +34,7 @@
                 <a href="#" class="d-block">{{ Auth::guard('doctor')->user()->name }}</a>
                 @endauth
                 @auth("pharmacy")
-                <a href="#" class="d-block">{{ Auth::guard('doctor')->user()->name }}</a>
+                <a href="#" class="d-block">{{ Auth::guard('pharmacy')->user()->pharmacy_name }}</a>
                 @endauth
 
             </div>
@@ -58,12 +58,12 @@
                                 <p>pharmacy</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ban</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item ">
