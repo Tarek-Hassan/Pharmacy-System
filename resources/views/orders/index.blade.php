@@ -15,8 +15,8 @@
                 <th>Is_Insured</th>
                 <th>Status</th>
                 <th>Creator_Type</th>
-                <th>Pharmacy_Id</th>
-                <th>Doctor_Id</th>
+                <th>Pharmacy_Name</th>
+                <th>Doctor_Name</th>
                 <th>Action</th>
             </tr>
         </thead>

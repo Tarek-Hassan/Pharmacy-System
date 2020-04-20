@@ -129,6 +129,14 @@
                         </p>
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a href="{{url('statistics')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            Statistics
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-cc-stripe"></i>
