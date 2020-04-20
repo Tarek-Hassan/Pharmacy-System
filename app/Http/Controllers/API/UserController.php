@@ -10,7 +10,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -23,45 +23,30 @@ class UserController extends Controller
 
     //get one user
     public function show($user){
-        return response()->json([
-            'message'=>"you are not autherized"
+        // return response()->json([
+        //     'message'=>"you are not autherized"
+        // ]);
+        $user=new UserResource(User::find($user));
+        return response($user,200,[
+            'status'=>true,
+            'error'=>""
         ]);
-        return new UserResource(User::find($user));
     }
 
     //create new user
     public function store(UserRequest $request){
-        
+        // dd($request->profile_pic);
        //hash password
+       $request['profile_pic']=Storage::disk('public')->put('profile_pics',$request->profile);
+    //    dd($request->profile_pic);
+
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-
-        
-        // storing image in public/pics and changes its name
-        if ($request->hasfile('profile_pic')){
-            $file=$request->file('profile_pic');
-            $extention=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extention;
-            $file->move('pics/',$filename);
-        }
-        $request->profile_pic=$filename;
-        $user = User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'password_confirmation'=>$request->password_confirmation,
-            'profile_pic'=>$request->profile_pic,
-            'national_id'=>$request->national_id,
-            'gender'=>$request->gender,
-            'mobile'=>$request->mobile,
-            'is_admin'=>$request->is_admin,
-            'birth_date'=>$request->birth_date
-
-        ]);
+        $user=User::create($request->all());
         // verification
         $user->sendApiEmailVerificationNotification();
         $success["message"] = "Please confirm yourself by clicking on verify user button sent to you on your email";
-        return response()->json(["success"=>$success], 201);//201 objected created
+        return response()->json($user, 201);//201 objected created
     }
 
 
@@ -75,34 +60,31 @@ class UserController extends Controller
                 'message'=>"you are not autherized"
             ]);
        }
+
+       //make sure not to update email
        if($request->email){
             return response()->json([
                 'message'=>"you cannot change email"
             ]);
        }
-    //    dd($request->all());
+
+       //if updating password hash it
+       if($request->password){
         $request['password']=Hash::make($request->password);
         $request['password_confirmation']=Hash::make($request->password_confirmation);
-        if ($request->hasfile('profile_pic')){
-            $file=$request->file('profile_pic');
-            $extention=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extention;
-            $file->move('pics/',$filename);
-            // $request->profile_pic=$filename;
-        
-        }
-        
-        User::find($user)->update([
-            'name'=>$request->name,
-            'password'=>$request->password,
-            'password_confirmation'=>$request->password_confirmation,
-            'profile_pic'=>$filename,
-            'national_id'=>$request->national_id,
-            'gender'=>$request->gender,
-            'mobile'=>$request->mobile,
-            'birth_date'=>$request->birth_date
+       }
 
-        ]);
+       //if updating profile pic delete the old image and save the new one
+       if($request->profile){
+            Storage::disk('public')->delete($request->oldimg);
+            $request['profile_pic']=Storage::disk('public')->put('profile_pics',$request->profile);
+       }else{
+           $request["profile_pic"]=$request->oldimg;
+       }
+
+       $user=User::findOrFail($user);
+       $user->update($request->all());
+       $user->fresh();
 
         return response()->json($user, 200);
     }

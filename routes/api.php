@@ -25,9 +25,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //user routes and authentication
 Route::get('/users', 'API\UserController@index');
 Route::post('/users', 'API\UserController@store');
+Route::get('users/{user}', 'API\UserController@show');
 Route::delete('users/{user}', 'API\UserController@destroy');
 Route::prefix('/users')->middleware(['auth:sanctum',])->group(function(){
-    Route::get('/{user}', 'API\UserController@show');
+    // Route::get('/{user}', 'API\UserController@show');
     Route::post('/{user}','API\UserController@update');//not working in postman with put method but post works
 });
 
@@ -59,3 +60,10 @@ Route::post('/orders/{id}','API\PrescriptionController@update');
 
 //order details
 Route::get('/order-details', 'API\OrderDetailsController@index');
+
+
+//requesting non existing page
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Page Not Found.'], 404);
+});

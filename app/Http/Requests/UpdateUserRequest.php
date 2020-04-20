@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             //
             'name' => [ 'string', 'max:255'],
             'password' => [ 'string', 'min:8', 'confirmed'],
-            'profile_pic.*'=>[ 'image|mimes:jpeg,jpg']
+            'profile.*'=>[ 'image|mimes:jpeg,jpg']
         ];
     }
 }
