@@ -27,12 +27,22 @@ class DoctorController extends Controller
                $data = Doctor::latest()->get();
                return DataTables::of($data)
                        ->addIndexColumn()
+                       ->addColumn('pharmacy_id', function($row){return $row->pharmacy->pharmacy_name;}) 
+                       ->addColumn('ban', function($row){ 
+                           if(!$row->isBanned()){
+                           
+                            return '<a  data-id="'.$row->id.'" class="ban btn btn-success btn-sm">Ban</a>';
+                           }else{
+                            return'<a  data-id="'.$row->id.'" class="ban btn btn-danger btn-sm " >UnBan</a>';
+                           }
+               
+                       })
                        ->addColumn('action', function($row){
                            $button = '&nbsp;&nbsp;&nbsp;<a href="doctors/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
                return $button;
                        })
-                       ->rawColumns(['action'])
+                       ->rawColumns(['ban','action'])
                        ->make(true);
            }
          
@@ -56,9 +66,15 @@ class DoctorController extends Controller
  
      
 
-       public function show($id) {
-           $doctors=Doctor::findOrFail($id);
-           return view('doctors.show', compact('doctors'));
+       public function Banned($id) {
+           $doctor=Doctor::findOrFail($id);
+           if($doctor->isBanned()){
+            $doctor->unban();
+
+           }else{
+            $doctor->ban();
+           }
+        return redirect()->route('doctors.index');
        }
    
    

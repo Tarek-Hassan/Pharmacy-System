@@ -46,6 +46,9 @@ public function login(Request $request)
     // dd(Auth::guard('doctor')->attempt($request->only('email','password'),$request->filled('remember')));
     if(Auth::guard('doctor')->attempt($request->only('email','password'),$request->filled('remember'))){
         //Authentication passed...
+        // if(Auth::guard('doctor')->user()->isBanned()){
+        //     return redirect()->route('doctor.login')->with('error','YourAccountIsBanned ');
+        // }
     return redirect()->route('doctor.index');
     }
 
@@ -53,12 +56,13 @@ public function login(Request $request)
     return $this->loginFailed();
 
 }
+
 public function logout()
 {
     Auth::guard('doctor')->logout();
     return redirect()
-        ->route('doctor.login')
-        ->with('status','doctor has been logged out!');
+    ->route('doctor.login');
+        
 }
 private function loginFailed(){
     return redirect()

@@ -15,8 +15,8 @@
                 <th>Is_Insured</th>
                 <th>Status</th>
                 <th>Creator_Type</th>
-                <th>Pharmacy_Id</th>
-                <th>Doctor_Id</th>
+                <th>Pharmacy_Name</th>
+                <th>Doctor_Name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -108,10 +108,10 @@
             ]
         });
         $(document).on("click", ".del", function () {
-            var myBookId = $(this).data('id');
-            console.log(myBookId);
+            var id = $(this).data('id');
+          
             var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/orders/' + myBookId; // assign action 
+            deleteForm.action = '/orders/' + id; // assign action 
 
         });
     });

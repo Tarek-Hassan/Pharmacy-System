@@ -111,10 +111,9 @@
             ]
         });
         $(document).on("click", ".del", function () {
-            var myBookId = $(this).data('id');
-            console.log(myBookId);
+            var id = $(this).data('id');
             var deleteForm = document.getElementById("formdelete") // get form 
-            deleteForm.action = '/pharmacies/' + myBookId; // assign action 
+            deleteForm.action = '/pharmacies/' + id; // assign action 
 
         });
     });

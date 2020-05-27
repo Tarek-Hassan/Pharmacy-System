@@ -54,10 +54,10 @@ Route::prefix('/payment')->middleware(['auth',])->group(function(){
 Route::prefix('/markAsRead')->middleware(['auth',])->group(function(){
         Route::get('', function(){
                 auth()->user()->unreadNotifications->markAsRead();
-	                return redirect()->back();
-
+                return redirect()->back();
+                
         })->name('mark');
-    });
+});
 
 Route::prefix('/medicines')->middleware(['auth',])->group(function(){
         Route::get('', 'MedicineController@index')->name('medicines.index');
@@ -68,7 +68,7 @@ Route::prefix('/medicines')->middleware(['auth',])->group(function(){
         Route::put('/{medicine}', 'MedicineController@update')->name("medicines.update");
         Route::delete('/{medicine}', 'MedicineController@destroy')->name("medicines.destroy");
 });
-Route::prefix('/orders')->middleware(['auth','is-ban'])->group(function(){
+Route::prefix('/orders')->middleware(['auth'])->group(function(){
         Route::get('', 'OrderController@index')->name('orders.index');
         Route::get('/create', 'OrderController@create')->name("orders.create");
         Route::post('', 'OrderController@store')->name("orders.store");
@@ -86,12 +86,13 @@ Route::prefix('/medicineorders')->middleware(['auth',])->group(function(){
         Route::put('/{medicineorder}', 'MedicineOrderController@update')->name("medicineorders.update");
         Route::delete('/{medicineorder}', 'MedicineOrderController@destroy')->name("medicineorders.destroy");
 });
-Route::prefix('/doctors')->middleware(['auth',])->group(function(){
+// Route::prefix('/doctors')->middleware(['auth','forbid-banned-doctor'])->group(function(){
+        Route::prefix('/doctors')->middleware(['auth'])->group(function(){
         Route::get('', 'DoctorController@index')->name('doctors.index');
         Route::get('/create', 'DoctorController@create')->name("doctors.create");
         Route::post('', 'DoctorController@store')->name("doctors.store");
         Route::get('/{doctor}', 'DoctorController@show')->name("doctors.show");
-        Route::get('/{doctor}/ban', 'DoctorController@ban')->name("doctors.ban");
+        Route::get('/{doctor}/ban', 'DoctorController@Banned')->name("doctors.Banned");
         Route::get('/{doctor}/edit', 'DoctorController@edit')->name("doctors.edit");
         Route::put('/{doctor}', 'DoctorController@update')->name("doctors.update");
         Route::delete('/{doctor}', 'DoctorController@destroy')->name("doctors.destroy");
@@ -108,8 +109,17 @@ Route::prefix('/pharmacies')->middleware(['auth',])->group(function(){
 
 });
 
-    
-                        
+Route::prefix('/statistics')->middleware(['auth',])->group(function(){
+        Route::get('', 'StatisticController@index')->name('statistics.index');
+        Route::get('/create', 'StatisticController@create')->name("statistics.create");
+        Route::post('', 'StatisticController@store')->name("statistics.store");
+        Route::get('/{statistics}', 'StatisticController@show')->name("statistics.show");
+        Route::get('/{statistics}/edit', 'StatisticController@edit')->name("statistics.edit");
+        Route::put('/{statistics}', 'StatisticController@update')->name("statistics.update");
+        Route::delete('/{statistics}', 'StatisticController@destroy')->name("statistics.destroy");
+});
+
+
 // =================================================================================================
 Route::GET('/home',function(){return view('admin.index');})->name('doctor.index')->middleware('auth:doctor');
 Route::GET('doctor','doctor\LoginController@showLoginForm')->name('doctor.login');

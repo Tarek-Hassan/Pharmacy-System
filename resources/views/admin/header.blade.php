@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('control')}}/dist/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('control')}}/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{asset('control')}}/plugins/chart/Chart.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{asset('control')}}/dist/css/fontsgoogleapis.css" rel="stylesheet">
     <!--include DataTable  -->

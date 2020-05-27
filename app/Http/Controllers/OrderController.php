@@ -10,7 +10,7 @@ use App\Http\Requests\OrderRequest;
 use App\Medicine;
 use App\MedicineOrder;
 use App\User;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
@@ -24,8 +24,10 @@ class OrderController extends Controller
            
            if ($request->ajax()) {
                $data = Order::latest()->get();
-               return Datatables::of($data)
+               return DataTables::of($data)
                        ->addIndexColumn()
+                    //    ->addColumn('pharmacy_id', function($row){return $row->pharmacy->pharmacy_name;}) 
+                    //    ->addColumn('doctor_id', function($row){return $row->doctor->name;}) 
                        ->addColumn('action', function($row){
                            $button = '&nbsp;&nbsp;&nbsp;<a href="orders/'.$row->id.'/edit" class="edit btn btn-secondary btn-sm">Edit</a>';
                            $button .= '&nbsp;&nbsp;&nbsp;<a  data-id="'.$row->id.'" class="del btn btn-danger btn-sm "  data-toggle="modal"data-target="#delete">Delete</a>';
