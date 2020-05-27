@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //user routes and authentication
-Route::get('/users', 'API\UserController@index');
+Route::get('/users', 'API\UserController@index'); //http://localhost:8000/users
 Route::post('/users', 'API\UserController@store');
 Route::get('users/{user}', 'API\UserController@show');
 Route::delete('users/{user}', 'API\UserController@destroy');
